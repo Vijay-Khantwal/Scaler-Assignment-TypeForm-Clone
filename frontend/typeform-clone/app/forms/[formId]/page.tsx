@@ -10,6 +10,7 @@ import { RightSettingsPanel } from '@/components/builder/RightSettingsPanel';
 import { SharePanel } from '@/components/builder/SharePanel';
 import { ResultsPanel } from '@/components/builder/ResultsPanel';
 import { PreviewOverlay } from '@/components/builder/PreviewOverlay';
+import { cn } from '@/lib/utils';
 
 export default function BuilderPage() {
   const params = useParams();

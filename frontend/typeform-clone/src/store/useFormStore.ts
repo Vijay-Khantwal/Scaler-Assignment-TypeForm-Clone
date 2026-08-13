@@ -409,7 +409,7 @@ export const useFormStore = create<ExtendedFormStore>()(
           title: `${source.title} (copy)`,
           status: 'draft',
           responseCount: 0,
-          completionRate: null,
+          completedCount: 0,
           createdAt: now,
           updatedAt: now,
           shareId: null,
