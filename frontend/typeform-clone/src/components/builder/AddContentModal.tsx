@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import type { QuestionType } from '@/types';
 import { QUESTION_TYPE_META } from '@/lib/utils';
 import { IconClose, IconPro } from '@/components/icons';
@@ -18,7 +19,7 @@ interface QuestionItem {
 interface ProItem {
   label: string;
   iconPath?: string;
-  pro?: boolean;
+  pro: boolean;
 }
 
 const SUPPORTED_TYPES: QuestionType[] = [
@@ -39,14 +40,11 @@ const supportedItems: QuestionItem[] = SUPPORTED_TYPES.map((t) => ({
   badgeBgHex: QUESTION_TYPE_META[t].badgeBgHex,
 }));
 
-// Pro/placeholder items from the reference — not implemented yet
 const PRO_ITEMS: ProItem[] = [
-  { label: 'Contact Info', pro: false },
-  { label: 'Phone Number', pro: false },
-  { label: 'Address', pro: false },
-  { label: 'Website', pro: false },
-  { label: 'Picture Choice', pro: false },
-  { label: 'Legal', pro: false },
+  { label: 'Rating', pro: false },
+  { label: 'Opinion Scale', pro: false },
+  { label: 'Ranking', pro: true },
+  { label: 'Matrix', pro: true },
   { label: 'Checkbox', pro: false },
   { label: 'Date', pro: false },
   { label: 'Signature', pro: true },
@@ -68,14 +66,14 @@ export function AddContentModal({ open, onClose, onSelect }: AddContentModalProp
   const [search, setSearch] = useState('');
   const [tab, setTab] = useState<'elements' | 'import' | 'ai'>('elements');
 
-  if (!open) return null;
+  if (!open || typeof document === 'undefined') return null;
 
   const filtered = supportedItems.filter((item) =>
     item.label.toLowerCase().includes(search.toLowerCase())
   );
 
-  return (
-    <>
+  return createPortal(
+    <div className="relative z-[9999]">
       {/* Backdrop */}
       <div
         className="fixed inset-0 z-40 bg-black/25 backdrop-blur-[1px]"
@@ -251,7 +249,8 @@ export function AddContentModal({ open, onClose, onSelect }: AddContentModalProp
           )}
         </div>
       </div>
-    </>
+    </div>,
+    document.body
   );
 }
 
