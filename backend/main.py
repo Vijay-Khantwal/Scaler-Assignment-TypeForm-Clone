@@ -164,7 +164,10 @@ def publish_form(form_id: str, db: Session = Depends(get_db)):
 
 @app.get("/api/public/forms/{share_id}", response_model=schemas.Form)
 def get_public_form(share_id: str, db: Session = Depends(get_db)):
-    form = db.query(models.Form).filter(models.Form.share_id == share_id, models.Form.status == "published").first()
+    form = db.query(models.Form).filter(
+        (models.Form.share_id == share_id) | (models.Form.id == share_id),
+        models.Form.status == "published"
+    ).first()
     if not form:
         raise HTTPException(status_code=404, detail="Form not found")
     form.questions.sort(key=lambda q: q.order_index)

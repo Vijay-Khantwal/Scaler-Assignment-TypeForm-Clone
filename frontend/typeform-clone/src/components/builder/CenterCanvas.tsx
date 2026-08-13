@@ -226,10 +226,8 @@ export function CenterCanvas({ form }: CenterCanvasProps) {
                   </div>
                 )}
 
-                {/* Page Questions — skip firstQ when it's the page parent (shown as header above) */}
-                {page
-                  .filter((q) => !(hasPageHeader && q.id === firstQ?.id))
-                  .map((question) => {
+                {/* Page Questions */}
+                {page.map((question) => {
                     const isSelected = question.id === selectedQuestionId;
                     return (
                       <QuestionCard
