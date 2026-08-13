@@ -1,0 +1,37 @@
+# ── References (design assets / screenshots) ──────────────────────────────────
+references/
+
+# ── Environment & Secrets ─────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Node ──────────────────────────────────────────────────────────────────────
+node_modules/
+**/node_modules/
+
+# ── Next.js ───────────────────────────────────────────────────────────────────
+**/.next/
+**/out/
+**/build/
+**/*.tsbuildinfo
+**/next-env.d.ts
+
+# ── Python / Backend ──────────────────────────────────────────────────────────
+backend/venv/
+**/__pycache__/
+**/*.pyc
+backend/typeform.db
+
+# ── OS / Editor ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.pem
+.vscode/
+.idea/
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log

@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+/* ============================================================
+   TYPEFORM CLONE — DESIGN SYSTEM TOKENS
+   Extracted from homeStyles.png and formStyles.png references
+   ============================================================ */
+
+:root {
+  /* Page surface */
+  --tf-bg: #f7f7f7;
+  --tf-sidebar-bg: #ffffff;
+  --tf-canvas-bg: #f2f0f3;
+  --tf-canvas-card-bg: #ffffff;
+
+  /* Borders */
+  --tf-border: #e4e4e7;
+  --tf-border-light: #f0eeef;
+  --tf-border-strong: #c8c4c9;
+
+  /* Typography — extracted from WhatFont overlays in reference images */
+  --tf-text-primary:   rgb(60, 50, 62);   /* #3C323E — near-black purple-grey */
+  --tf-text-secondary: rgb(101, 93, 103); /* #655D67 — medium grey-purple     */
+  --tf-text-muted:     rgb(132, 126, 133);/* #847E85 — light grey-purple       */
+  --tf-text-white:     #ffffff;
+
+  /* Interactive / Brand */
+  --tf-accent: #1a1a1a;        /* "Create form" button, near black */
+  --tf-accent-hover: #2d2d2d;
+  --tf-green: #196042;         /* "View plans" / published state  */
+  --tf-green-hover: #145236;
+  --tf-green-light: #e7f5ee;   /* published badge bg              */
+  --tf-green-text: #196042;
+
+  /* Selected / Active */
+  --tf-selected-bg: #f0eef1;
+  --tf-selected-border: #1a1a1a;
+  --tf-hover-bg: #f7f5f8;
+
+  /* Shadows */
+  --tf-shadow-sm: 0 1px 2px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+  --tf-shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --tf-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.05);
+  --tf-shadow-canvas: 0 2px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
+}
+
+/* ============================================================
+   TAILWIND v4 THEME OVERRIDES
+   ============================================================ */
+
+@theme inline {
+  /* Wire the next/font Inter CSS variable into Tailwind's font-sans */
+  --font-sans: var(--font-inter, "Inter", ui-sans-serif, system-ui, "Helvetica Neue", sans-serif);
+  /* ASSUMED_FONT: Update later if custom Typeform font files are provided */
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+html {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  height: 100%;
+  background-color: var(--tf-bg);
+  color: var(--tf-text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Remove autofill browser styling */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  box-shadow: 0 0 0 1000px transparent inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Kill all browser-default outlines and focus rings globally */
+*,
+*:focus,
+*:focus-visible,
+*:focus-within {
+  outline: none !important;
+  outline-offset: 0 !important;
+}
+
+input,
+textarea,
+select,
+button {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Kill native input/select/textarea border – rely solely on our own styling */
+input,
+textarea,
+select {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+
+/* Typeform-style toggle */
+.tf-toggle {
+  position: relative;
+  display: inline-flex;
+  width: 36px;
+  height: 20px;
+  border-radius: 9999px;
+  background-color: #d1d1d1;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  flex-shrink: 0;
+}
+.tf-toggle.active {
+  background-color: var(--tf-accent);
+}
+.tf-toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: transform 0.15s ease;
+}
+.tf-toggle.active .tf-toggle-knob {
+  transform: translateX(16px);
+}
+
+/* Drag ghost */
+.dnd-ghost {
+  opacity: 0.4;
+  pointer-events: none;
+}
