@@ -335,7 +335,12 @@ export const useFormStore = create<ExtendedFormStore>()(
           const res = await fetch('/api/forms');
           if (res.ok) {
             const data = await res.json();
-            set({ forms: data });
+            const normalized = data.map((f: any) => ({
+              ...f,
+              responseCount: f.responseCount ?? f.responsecount ?? 0,
+              completedCount: f.completedCount ?? f.completedcount ?? 0,
+            }));
+            set({ forms: normalized });
           }
         } catch (err) {
           console.error(err);
@@ -347,7 +352,12 @@ export const useFormStore = create<ExtendedFormStore>()(
           const res = await fetch(`/api/forms/${formId}`);
           if (res.ok) {
             const data = await res.json();
-            set(state => ({ forms: state.forms.map(f => f.id === formId ? data : f) }));
+            const normalized = {
+              ...data,
+              responseCount: data.responseCount ?? data.responsecount ?? 0,
+              completedCount: data.completedCount ?? data.completedcount ?? 0,
+            };
+            set(state => ({ forms: state.forms.map(f => f.id === formId ? normalized : f) }));
           }
         } catch (err) {
           console.error(err);

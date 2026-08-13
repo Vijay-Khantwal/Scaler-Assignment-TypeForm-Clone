@@ -51,7 +51,7 @@ export function BuilderHeader({ form, activeTab = 'content', onTabChange, onPubl
   const tabs = isPublished ? BUILDER_TABS_PUBLISHED : BUILDER_TABS_DRAFT;
 
   return (
-    <header className="flex flex-col bg-white shrink-0 z-20 relative border-b border-[#e4e4e7]">
+    <header className="flex flex-col bg-white shrink-0 z-50 relative border-b border-[#e4e4e7]">
       {/* Top row */}
       <div className="flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-8 min-h-[48px] py-2 md:py-0">
         {/* Left: breadcrumb */}
