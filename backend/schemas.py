@@ -59,6 +59,8 @@ class Form(FormBase):
     updated_at: str
     published_at: Optional[str] = None
     questions: List[Question] = []
+    responseCount: int = 0
+    completedCount: int = 0
 
 # Submissions
 class QuestionAnswerBase(BaseSchema):

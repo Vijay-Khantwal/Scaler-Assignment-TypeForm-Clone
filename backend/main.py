@@ -122,6 +122,25 @@ def delete_form(form_id: str, db: Session = Depends(get_db)):
     db.commit()
     return {"ok": True}
 
+@app.delete("/api/forms/{form_id}/submissions/{submission_id}")
+def delete_submission(form_id: str, submission_id: str, db: Session = Depends(get_db)):
+    db_sub = db.query(models.Submission).filter(
+        models.Submission.id == submission_id,
+        models.Submission.form_id == form_id
+    ).first()
+    if not db_sub:
+        raise HTTPException(status_code=404, detail="Submission not found")
+    
+    db.delete(db_sub)
+    db.commit()
+    return {"message": "Submission deleted"}
+
+@app.post("/api/seed")
+def seed_database():
+    import seed
+    seed.seed()
+    return {"message": "Database seeded successfully"}
+
 @app.post("/api/forms/{form_id}/publish", response_model=schemas.Form)
 def publish_form(form_id: str, db: Session = Depends(get_db)):
     db_form = db.query(models.Form).filter(models.Form.id == form_id).first()

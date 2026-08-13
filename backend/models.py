@@ -18,6 +18,14 @@ class Form(Base):
     questions = relationship("Question", back_populates="form", cascade="all, delete-orphan")
     submissions = relationship("Submission", back_populates="form", cascade="all, delete-orphan")
 
+    @property
+    def responseCount(self):
+        return len(self.submissions)
+
+    @property
+    def completedCount(self):
+        return len(self.submissions)
+
 class Question(Base):
     __tablename__ = "questions"
 
