@@ -21,7 +21,7 @@ import type {
 interface ExtendedFormStore extends FormStore {
   targetParentIdForNewQuestion?: string | null;
   setTargetParentIdForNewQuestion?: (id: string | null) => void;
-  addQuestion: (formId: string, type: QuestionType, targetParentId?: string | null) => void;
+  addQuestion: (formId: string, type: QuestionType, targetParentId?: string | null) => Question;
 }
 import { generateId, getThumbnailColor } from '@/lib/utils';
 
@@ -312,7 +312,7 @@ const syncFormWithBackend = async (form: Form) => {
 // Store
 // ---------------------------------------------------------------------------
 
-export const useFormStore = create<FormStore>()(
+export const useFormStore = create<ExtendedFormStore>()(
   persist(
     (set, get) => ({
       // -----------------------------------------------------------------------
