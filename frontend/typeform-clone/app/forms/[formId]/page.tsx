@@ -20,6 +20,7 @@ export default function BuilderPage() {
   const { setActiveFormId, publishForm, unpublishForm, isPreviewMode, setPreviewMode } = useFormStore();
   const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState('content');
+  const [mobilePanel, setMobilePanel] = useState<'left' | 'right' | null>(null);
 
   // Avoid Zustand localStorage hydration mismatch on first render
   useEffect(() => {
@@ -65,8 +66,6 @@ export default function BuilderPage() {
   const handlePublish = () => {
     publishForm(form.id);
   };
-
-  const [mobilePanel, setMobilePanel] = useState<'left' | 'right' | null>(null);
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
