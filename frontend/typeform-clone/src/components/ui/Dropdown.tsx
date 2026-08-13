@@ -8,6 +8,7 @@ import {
   createContext,
   useContext,
 } from 'react';
+import { createPortal } from 'react-dom';
 import { cn } from '@/lib/utils';
 
 // ─── Context ─────────────────────────────────────────────────────────────────
@@ -34,17 +35,33 @@ export function Dropdown({
 }: DropdownProps) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const [coords, setCoords] = useState({ top: 0, left: 0, width: 0 });
+
+  // Update coords
+  useEffect(() => {
+    if (open && containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      setCoords({
+        top: rect.bottom + 4,
+        left: rect.left,
+        width: rect.width,
+      });
+    }
+  }, [open]);
 
   // Close on outside click
   useEffect(() => {
     if (!open) return;
     const handler = (e: MouseEvent) => {
-      if (!containerRef.current?.contains(e.target as Node)) {
+      const isInsideContainer = containerRef.current?.contains(e.target as Node);
+      const isInsideMenu = menuRef.current?.contains(e.target as Node);
+      if (!isInsideContainer && !isInsideMenu) {
         setOpen(false);
       }
     };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
+    document.addEventListener('mousedown', handler, true);
+    return () => document.removeEventListener('mousedown', handler, true);
   }, [open]);
 
   // Close on Escape
@@ -57,6 +74,38 @@ export function Dropdown({
     return () => document.removeEventListener('keydown', handler);
   }, [open]);
 
+  // Handle scroll to update position or close
+  useEffect(() => {
+    if (!open) return;
+    const handler = () => {
+      setOpen(false);
+    };
+    window.addEventListener('scroll', handler, true);
+    return () => window.removeEventListener('scroll', handler, true);
+  }, [open]);
+
+  const menu = open ? (
+    <div
+      ref={menuRef}
+      className={cn(
+        'fixed z-[9999] min-w-[160px]',
+        'bg-white border border-[#e4e4e7] rounded-xl shadow-lg',
+        'py-1 overflow-hidden'
+      )}
+      style={{
+        top: coords.top,
+        ...(align === 'right' ? { left: coords.left + coords.width - 160 } : { left: coords.left }),
+      }}
+      role="menu"
+    >
+      {children}
+    </div>
+  ) : null;
+
+  // Render portal only on client
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   return (
     <DropdownContext.Provider value={{ close: () => setOpen(false) }}>
       <div ref={containerRef} className={cn('relative inline-block', className)}>
@@ -64,19 +113,7 @@ export function Dropdown({
         <div onClick={() => setOpen((prev) => !prev)}>{trigger}</div>
 
         {/* Menu */}
-        {open && (
-          <div
-            className={cn(
-              'absolute top-full mt-1 z-50 min-w-[160px]',
-              'bg-white border border-[#e4e4e7] rounded-xl shadow-lg',
-              'py-1 overflow-hidden',
-              align === 'right' ? 'right-0' : 'left-0'
-            )}
-            role="menu"
-          >
-            {children}
-          </div>
-        )}
+        {mounted && menu && createPortal(menu, document.body)}
       </div>
     </DropdownContext.Provider>
   );
