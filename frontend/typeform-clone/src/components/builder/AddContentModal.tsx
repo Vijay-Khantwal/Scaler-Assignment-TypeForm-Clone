@@ -97,10 +97,10 @@ export function AddContentModal({ open, onClose, onSelect }: AddContentModalProp
                 key={t.id}
                 onClick={() => setTab(t.id as typeof tab)}
                 className={cn(
-                  'relative px-4 py-3 text-sm font-medium transition-colors border-none',
+                  'relative px-4 py-3 text-sm font-medium transition-colors border-none cursor-pointer',
                   tab === t.id
                     ? 'text-[#3C323E] before:absolute before:top-0 before:left-0 before:right-0 before:h-[3px] before:bg-[#3C323E] bg-white'
-                    : 'text-[#655D67] hover:text-[#3C323E] cursor-pointer'
+                    : 'text-[#655D67] hover:text-[#3C323E]'
                 )}
               >
                 {t.label}
@@ -108,7 +108,7 @@ export function AddContentModal({ open, onClose, onSelect }: AddContentModalProp
             ))}
             <button
               onClick={onClose}
-              className="ml-auto p-1.5 text-[#847E85] hover:text-[#3C323E] hover:bg-[#f7f5f8] rounded-lg transition-colors"
+              className="ml-auto p-1.5 text-[#847E85] hover:text-[#3C323E] hover:bg-[#f7f5f8] rounded-lg transition-colors cursor-pointer"
             >
               <IconClose size={16} strokeWidth={1.5} />
             </button>
@@ -267,7 +267,7 @@ function QuestionTypeButton({
   return (
     <button
       onClick={onClick}
-      className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-[#f7f5f8] transition-colors text-left group"
+      className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-[#f7f5f8] transition-colors text-left group cursor-pointer"
     >
       {/* Badge icon container — matching reference AddContentUI.png */}
       <div

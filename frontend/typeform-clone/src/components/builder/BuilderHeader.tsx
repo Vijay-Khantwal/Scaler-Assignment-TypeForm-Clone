@@ -51,9 +51,9 @@ export function BuilderHeader({ form, activeTab = 'content', onTabChange, onPubl
   const tabs = isPublished ? BUILDER_TABS_PUBLISHED : BUILDER_TABS_DRAFT;
 
   return (
-    <header className="flex flex-col bg-white shrink-0 z-20 relative">
+    <header className="flex flex-col bg-white shrink-0 z-20 relative border-b border-[#e4e4e7]">
       {/* Top row */}
-      <div className="flex items-center justify-between px-8 h-12 pt-1.5">
+      <div className="flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-8 min-h-[48px] py-2 md:py-0">
         {/* Left: breadcrumb */}
         <div className="flex items-center gap-1.5 text-sm text-[#655D67]">
           <button
@@ -61,12 +61,12 @@ export function BuilderHeader({ form, activeTab = 'content', onTabChange, onPubl
             className="flex items-center gap-1.5 hover:text-[#3C323E] transition-colors cursor-pointer"
           >
             <IconForms size={14} />
-            Forms
+            <span className="hidden sm:inline">Forms</span>
           </button>
           <IconChevronRight size={8} className="text-[#c4c1c5]" />
           <button
             onClick={() => setIsRenameModalOpen(true)}
-            className="text-[#3C323E] font-medium max-w-[200px] truncate cursor-pointer hover:bg-[#f7f5f8] px-1.5 py-0.5 rounded-md transition-colors"
+            className="text-[#3C323E] font-medium max-w-[120px] sm:max-w-[200px] truncate cursor-pointer hover:bg-[#f7f5f8] px-1.5 py-0.5 rounded-md transition-colors"
           >
             {form.title || 'New form'}
           </button>
@@ -80,7 +80,7 @@ export function BuilderHeader({ form, activeTab = 'content', onTabChange, onPubl
         />
 
         {/* Center: tabs */}
-        <nav className="absolute left-1/2 -translate-x-1/2 flex items-center h-full p-0">
+        <nav className="order-3 md:order-none w-full md:w-auto mt-2 md:mt-0 md:absolute md:left-1/2 md:-translate-x-1/2 flex items-center justify-center md:h-full p-0 overflow-x-auto no-scrollbar">
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -92,9 +92,9 @@ export function BuilderHeader({ form, activeTab = 'content', onTabChange, onPubl
                 }
               }}
               className={cn(
-                'relative flex items-center h-full px-1 text-sm transition-colors cursor-pointer',
+                'relative flex items-center h-full min-h-[40px] md:min-h-[48px] px-1 text-sm transition-colors cursor-pointer shrink-0',
                 tab.id === activeTab
-                  ? 'text-[#3C323E] font-semibold before:absolute before:top-0 before:left-2 before:right-2 before:h-[3px] before:bg-[#3C323E] before:rounded-b-sm'
+                  ? 'text-[#3C323E] font-semibold before:absolute before:bottom-0 md:before:top-0 md:before:bottom-auto before:left-2 before:right-2 before:h-[3px] before:bg-[#3C323E] before:rounded-t-sm md:before:rounded-b-sm'
                   : 'text-[#655D67] font-medium hover:text-[#3C323E] bg-transparent'
               )}
             >
@@ -106,7 +106,7 @@ export function BuilderHeader({ form, activeTab = 'content', onTabChange, onPubl
         </nav>
 
         {/* Right: actions */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           {!isPublished ? (
             <button
               onClick={() => {

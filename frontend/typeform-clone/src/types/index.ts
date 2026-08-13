@@ -142,10 +142,9 @@ export interface Form {
   responseCount: number;
 
   /**
-   * Mock completion rate as a percentage string, e.g. "100%"
-   * Shown in the dashboard table. "-" when no responses.
+   * Number of completed responses.
    */
-  completionRate: string | null;
+  completedCount: number;
 
   /** ISO timestamp strings */
   createdAt: string;

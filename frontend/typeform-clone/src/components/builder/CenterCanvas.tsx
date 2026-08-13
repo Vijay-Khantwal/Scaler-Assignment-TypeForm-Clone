@@ -54,9 +54,15 @@ export function CenterCanvas({ form }: CenterCanvasProps) {
   }, [selectedQuestionId]);
 
   const [isMobileView, setIsMobileView] = useState(false);
+  const [activeCanvasSection, setActiveCanvasSection] = useState<'header' | 'question'>('question');
+
+  useEffect(() => {
+    // We only want to default to 'question' if the active canvas section isn't already 'header'
+    // for this specific question. This is handled gracefully by onClick events below.
+  }, [selectedQuestionId]);
 
   return (
-    <div className="flex-1 flex flex-col bg-transparent overflow-hidden">
+    <div className="flex-1 flex flex-col bg-transparent overflow-hidden pb-16 md:pb-0">
       {/* Sub-toolbar */}
       <div className="flex items-center px-4 h-12 gap-1 shrink-0 bg-[#F7F7F8] rounded-xl mx-6 mt-3 z-10">
         <button
@@ -182,9 +188,12 @@ export function CenterCanvas({ form }: CenterCanvasProps) {
               {/* Page Header (only if grouped) */}
               {hasPageHeader && firstQ && (
                 <div
-                  onClick={() => setSelectedQuestionId(firstQ.id)}
+                  onClick={() => {
+                    setSelectedQuestionId(firstQ.id);
+                    setActiveCanvasSection('header');
+                  }}
                   className={`py-8 border-b border-[#e4e4e7]/50 mb-4 transition-all duration-200 cursor-text rounded-xl px-3 -mx-3 ${
-                    selectedQuestionId === firstQ.id ? 'bg-white/60 ring-1 ring-[#e4e4e7]' : 'hover:bg-white/40'
+                    selectedQuestionId === firstQ.id && activeCanvasSection === 'header' ? 'bg-white/60 ring-1 ring-[#e4e4e7]' : 'hover:bg-white/40'
                   }`}
                 >
                   <div className="flex items-center gap-2 mb-3">
@@ -195,7 +204,10 @@ export function CenterCanvas({ form }: CenterCanvasProps) {
                   <input
                     type="text"
                     value={firstQ.settings.pageTitle ?? ''}
-                    onFocus={() => setSelectedQuestionId(firstQ.id)}
+                    onFocus={() => {
+                      setSelectedQuestionId(firstQ.id);
+                      setActiveCanvasSection('header');
+                    }}
                     onChange={(e) => {
                       e.stopPropagation();
                       updateQuestion(form.id, firstQ.id, {
@@ -208,7 +220,10 @@ export function CenterCanvas({ form }: CenterCanvasProps) {
                   <input
                     type="text"
                     value={firstQ.settings.pageDescription ?? ''}
-                    onFocus={() => setSelectedQuestionId(firstQ.id)}
+                    onFocus={() => {
+                      setSelectedQuestionId(firstQ.id);
+                      setActiveCanvasSection('header');
+                    }}
                     onChange={(e) => {
                       e.stopPropagation();
                       updateQuestion(form.id, firstQ.id, {
@@ -223,7 +238,7 @@ export function CenterCanvas({ form }: CenterCanvasProps) {
 
               {/* Page Questions */}
               {activePage.map((question) => {
-                  const isSelected = question.id === selectedQuestionId;
+                  const isSelected = question.id === selectedQuestionId && (question.id !== firstQ.id || activeCanvasSection === 'question' || !hasPageHeader);
                   return (
                     <QuestionCard
                       key={question.id}
@@ -231,7 +246,10 @@ export function CenterCanvas({ form }: CenterCanvasProps) {
                       question={question}
                       formId={form.id}
                       isSelected={isSelected}
-                      onClick={() => setSelectedQuestionId(question.id)}
+                      onClick={() => {
+                        setSelectedQuestionId(question.id);
+                        setActiveCanvasSection('question');
+                      }}
                       isChild={hasPageHeader}
                       pageIndex={actualPageIndex}
                     />

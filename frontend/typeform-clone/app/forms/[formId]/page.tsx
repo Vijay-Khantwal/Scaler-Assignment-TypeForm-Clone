@@ -65,6 +65,8 @@ export default function BuilderPage() {
     publishForm(form.id);
   };
 
+  const [mobilePanel, setMobilePanel] = useState<'left' | 'right' | null>(null);
+
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       {/* Top header */}
@@ -76,12 +78,62 @@ export default function BuilderPage() {
       />
 
       {/* Main content area */}
-      <div className="flex flex-1 min-h-0 overflow-hidden relative bg-white">
+      <div className="flex flex-1 min-h-0 overflow-hidden relative bg-[#f2f0f3] lg:bg-white">
         {activeTab === 'content' && (
           <>
-            <LeftPanel form={form} />
+            {/* Desktop & Mobile Slide-over for Left Panel */}
+            <div className={cn(
+              "absolute inset-y-0 left-0 z-40 transform transition-transform duration-300 lg:relative lg:translate-x-0 bg-white shadow-xl lg:shadow-none",
+              mobilePanel === 'left' ? "translate-x-0" : "-translate-x-full lg:flex"
+            )}>
+              <LeftPanel form={form} />
+              {/* Close button for mobile */}
+              {mobilePanel === 'left' && (
+                <button onClick={() => setMobilePanel(null)} className="absolute top-4 right-4 lg:hidden p-2 bg-gray-100 rounded-full">
+                  ✕
+                </button>
+              )}
+            </div>
+            
+            {/* Overlay for mobile when panel is open */}
+            {mobilePanel && (
+              <div 
+                className="fixed inset-0 bg-black/20 z-30 lg:hidden" 
+                onClick={() => setMobilePanel(null)}
+              />
+            )}
+
             <CenterCanvas form={form} />
-            <RightSettingsPanel form={form} selectedQuestion={selectedQuestion} />
+
+            {/* Desktop & Mobile Slide-over for Right Panel */}
+            <div className={cn(
+              "absolute inset-y-0 right-0 z-40 transform transition-transform duration-300 lg:relative lg:translate-x-0 bg-white shadow-xl lg:shadow-none",
+              mobilePanel === 'right' ? "translate-x-0" : "translate-x-full lg:flex"
+            )}>
+              <RightSettingsPanel form={form} selectedQuestion={selectedQuestion} />
+              {/* Close button for mobile */}
+              {mobilePanel === 'right' && (
+                <button onClick={() => setMobilePanel(null)} className="absolute top-4 left-4 lg:hidden p-2 bg-gray-100 rounded-full z-50">
+                  ✕
+                </button>
+              )}
+            </div>
+
+            {/* Mobile Bottom Bar */}
+            <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[#e4e4e7] p-3 flex justify-between z-20">
+              <button 
+                onClick={() => setMobilePanel('left')}
+                className="flex-1 flex justify-center py-2 text-sm font-medium text-[#3C323E] bg-[#f7f5f8] rounded-lg mr-2"
+              >
+                Questions
+              </button>
+              <button 
+                onClick={() => setMobilePanel('right')}
+                className="flex-1 flex justify-center py-2 text-sm font-medium text-[#3C323E] bg-[#f7f5f8] rounded-lg ml-2"
+              >
+                Settings
+              </button>
+            </div>
           </>
         )}
         {activeTab === 'share' && (

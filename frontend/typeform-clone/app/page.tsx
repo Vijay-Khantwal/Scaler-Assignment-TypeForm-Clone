@@ -48,31 +48,31 @@ export default function DashboardPage() {
     <div className="flex flex-col h-screen overflow-hidden bg-[#f7f7f7]">
       <DashboardHeader activeTab="forms" />
 
-      <div className="flex flex-1 min-h-0">
+      <div className="flex flex-col md:flex-row flex-1 min-h-0 overflow-y-auto md:overflow-hidden">
         <LeftSidebar />
 
         {/* Main content */}
-        <main className="flex-1 overflow-y-auto bg-[#f7f7f7]">
-          <div className="max-w-5xl mx-auto px-8 py-6">
+        <main className="flex-1 overflow-y-visible md:overflow-y-auto bg-[#f7f7f7]">
+          <div className="max-w-5xl mx-auto px-4 md:px-8 py-6">
 
             {/* Workspace header */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-3">
+            <div className="flex flex-wrap md:flex-nowrap items-center justify-between mb-6 gap-4">
+              <div className="flex items-center gap-2 sm:gap-3">
                 <h1 className="text-xl font-semibold text-[#3C323E]">
                   My workspace
                 </h1>
-                <button className="p-1 text-[#847E85] hover:text-[#655D67] hover:bg-[#f0eef1] rounded-md transition-colors">
+                <button className="p-1 text-[#847E85] hover:text-[#655D67] hover:bg-[#f0eef1] rounded-md transition-colors cursor-pointer">
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                     <path fill="currentColor" fillRule="evenodd" clipRule="evenodd" d="M6.5 3a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0m0 5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0m0 5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0" />
                   </svg>
                 </button>
-                <button className="flex items-center gap-1.5 text-sm text-[#655D67] hover:text-[#3C323E] transition-colors">
+                <button className="flex items-center gap-1.5 text-sm text-[#655D67] hover:text-[#3C323E] transition-colors cursor-pointer">
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                     <path fill="currentColor" fillRule="evenodd" clipRule="evenodd" d="M8 1a.75.75 0 0 1 .75.75v5.5h5.5a.75.75 0 0 1 0 1.5h-5.5v5.5a.75.75 0 0 1-1.5 0v-5.5h-5.5a.75.75 0 0 1 0-1.5h5.5v-5.5A.75.75 0 0 1 8 1z" />
                   </svg>
                   Invite
                 </button>
-                <button className="p-1 text-[#c4c1c5] hover:text-[#655D67] transition-colors">
+                <button className="p-1 text-[#c4c1c5] hover:text-[#655D67] transition-colors cursor-pointer">
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                     <path fill="currentColor" d="M8 1.5A6.5 6.5 0 1 0 14.5 8 6.508 6.508 0 0 0 8 1.5zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" fillRule="evenodd" clipRule="evenodd" />
                   </svg>
@@ -81,7 +81,7 @@ export default function DashboardPage() {
 
               {/* Sort + View controls */}
               <div className="flex items-center gap-2">
-                <button className="flex items-center gap-1.5 text-sm text-[#655D67] border border-[#e4e4e7] rounded-lg px-3 py-1.5 hover:bg-white transition-colors bg-white">
+                <button className="flex items-center gap-1.5 text-sm text-[#655D67] border border-[#e4e4e7] rounded-lg px-3 py-1.5 hover:bg-white transition-colors bg-white cursor-pointer">
                   <IconFilter size={13} strokeWidth={1.5} />
                   Date created
                   <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
@@ -94,7 +94,7 @@ export default function DashboardPage() {
                   <button
                     onClick={() => setView('list')}
                     className={cn(
-                      'p-2 transition-colors',
+                      'p-2 transition-colors cursor-pointer',
                       view === 'list' ? 'bg-[#f0eef1] text-[#3C323E]' : 'text-[#847E85] hover:bg-[#f7f5f8]'
                     )}
                     title="List view"
@@ -104,7 +104,7 @@ export default function DashboardPage() {
                   <button
                     onClick={() => setView('grid')}
                     className={cn(
-                      'p-2 transition-colors border-l border-[#e4e4e7]',
+                      'p-2 transition-colors border-l border-[#e4e4e7] cursor-pointer',
                       view === 'grid' ? 'bg-[#f0eef1] text-[#3C323E]' : 'text-[#847E85] hover:bg-[#f7f5f8]'
                     )}
                     title="Grid view"
@@ -127,14 +127,14 @@ export default function DashboardPage() {
                   </p>
                   <button
                     onClick={handleCreateForm}
-                    className="mt-2 text-xs font-medium text-[#3C323E] border border-[#e4e4e7] rounded-full px-3 py-1 hover:bg-[#f7f5f8] transition-colors"
+                    className="mt-2 text-xs font-medium text-[#3C323E] border border-[#e4e4e7] rounded-full px-3 py-1 hover:bg-[#f7f5f8] transition-colors cursor-pointer"
                   >
                     Create a form
                   </button>
                 </div>
                 <button
                   onClick={() => setBannerVisible(false)}
-                  className="p-1 text-[#c4c1c5] hover:text-[#655D67] hover:bg-[#f7f5f8] rounded-md transition-colors shrink-0"
+                  className="p-1 text-[#c4c1c5] hover:text-[#655D67] hover:bg-[#f7f5f8] rounded-md transition-colors shrink-0 cursor-pointer"
                 >
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                     <path fill="currentColor" d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.75.75 0 1 1 1.06 1.06L9.06 8l3.22 3.22a.75.75 0 1 1-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 0 1-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z" fillRule="evenodd" clipRule="evenodd" />

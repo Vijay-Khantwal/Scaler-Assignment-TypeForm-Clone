@@ -118,7 +118,7 @@ function createEmptyForm(index: number): Form {
     status: 'draft',
     questions: [],
     responseCount: 0,
-    completionRate: null,
+    completedCount: 0,
     createdAt: now,
     updatedAt: now,
     shareId: null,
@@ -139,7 +139,7 @@ const MOCK_FORMS: Form[] = [
     title: 'Customer Feedback Survey',
     status: 'published',
     responseCount: 12,
-    completionRate: '83%',
+    completedCount: 10,
     createdAt: '2026-08-01T09:00:00.000Z',
     updatedAt: '2026-08-10T14:30:00.000Z',
     shareId: 'share_cfs_2026',
@@ -227,7 +227,7 @@ const MOCK_FORMS: Form[] = [
     title: 'Product Onboarding',
     status: 'draft',
     responseCount: 0,
-    completionRate: null,
+    completedCount: 0,
     createdAt: '2026-08-12T11:00:00.000Z',
     updatedAt: '2026-08-13T08:15:00.000Z',
     shareId: null,
@@ -712,6 +712,15 @@ export const useFormStore = create<ExtendedFormStore>()(
             body: JSON.stringify(submissionData)
           });
           if (!res.ok) throw new Error('Submission failed');
+          
+          // Optimistically update local form analytics so the dashboard reflects the new submission immediately
+          set(state => ({
+            forms: state.forms.map(f => 
+              f.id === formId 
+                ? { ...f, responseCount: (f.responseCount || 0) + 1, completedCount: (f.completedCount || 0) + 1 }
+                : f
+            )
+          }));
         } catch (err) {
           console.error(err);
         }

@@ -204,7 +204,7 @@ export function RespondentApp({ form, isPreview = false, onClose }: RespondentAp
 
       {/* Main Content Area */}
       <div className="flex-1 overflow-y-auto w-full">
-        <div className="flex flex-col relative w-full max-w-3xl mx-auto pt-8 pb-24 min-h-full">
+        <div className="flex flex-col relative w-full max-w-3xl mx-auto pt-6 md:pt-8 pb-24 min-h-full">
           <AnimatePresence mode="wait" custom={direction}>
           {currentPage ? (
             <motion.div
@@ -214,38 +214,40 @@ export function RespondentApp({ form, isPreview = false, onClose }: RespondentAp
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -40 * direction, opacity: 0 }}
               transition={{ duration: 0.35, ease: "easeOut" }}
-              className="flex-1 flex flex-col justify-center px-12 py-12"
+              className="flex-1 flex flex-col justify-center px-6 py-8 md:px-12 md:py-12"
             >
-              <div className="space-y-16">
-                {currentPage.length >= 2 && currentPage[0]?.settings?.pageTitle && (
+              <div className="space-y-12 md:space-y-16">
+                {currentPage.length >= 2 && (currentPage[0]?.settings?.pageTitle || currentPage[0]?.settings?.pageDescription) && (
                   <div className="mb-4">
-                    <h1 className="text-3xl font-medium text-[#3C323E] leading-snug">{currentPage[0].settings.pageTitle}</h1>
-                    {currentPage[0].settings.pageDescription && (
-                      <p className="text-lg text-[#655D67] mt-3">{currentPage[0].settings.pageDescription}</p>
+                    {currentPage[0]?.settings?.pageTitle && (
+                      <h1 className="text-2xl md:text-3xl font-medium text-[#3C323E] leading-snug">{currentPage[0].settings.pageTitle}</h1>
+                    )}
+                    {currentPage[0]?.settings?.pageDescription && (
+                      <p className="text-base md:text-lg text-[#655D67] mt-3">{currentPage[0].settings.pageDescription}</p>
                     )}
                   </div>
                 )}
                 {currentPage.map((q, qIndex) => (
                   <div key={q.id}>
                     {/* Question number + arrow + title row */}
-                    <div className="flex items-start gap-4 mb-8">
+                    <div className="flex items-start gap-3 md:gap-4 mb-6 md:mb-8">
                       <div className="flex items-center gap-1.5 shrink-0 mt-1.5">
-                        <span className="text-sm font-semibold bg-[#3C323E] text-white rounded px-1.5 py-0.5 leading-none">{qIndex + 1}</span>
+                        <span className="text-xs md:text-sm font-semibold bg-[#3C323E] text-white rounded px-1.5 py-0.5 leading-none">{qIndex + 1}</span>
                         <span className="text-[#3C323E] text-sm font-medium">→</span>
                       </div>
                       <div className="flex-1">
-                        <h1 className="text-2xl font-normal text-[#3C323E] leading-snug">
+                        <h1 className="text-xl md:text-2xl font-normal text-[#3C323E] leading-snug">
                           {q.title || '...'}
                           {q.settings?.required && <span className="ml-1">*</span>}
                         </h1>
                         {q.settings?.description && (
-                          <p className="text-lg text-[#655D67] mt-2">{q.settings.description}</p>
+                          <p className="text-base md:text-lg text-[#655D67] mt-2">{q.settings.description}</p>
                         )}
                       </div>
                     </div>
 
                     {/* Answer area */}
-                    <div className="pl-[56px] w-full">
+                    <div className="pl-[36px] md:pl-[56px] w-full">
                       <QuestionInput
                         question={q}
                         value={answers[q.id]}

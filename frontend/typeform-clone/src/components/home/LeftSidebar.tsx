@@ -29,16 +29,16 @@ export function LeftSidebar({ activeWorkspace = 'my-workspace' }: LeftSidebarPro
     router.push(`/forms/${newForm.id}`);
   };
 
-  const totalResponses = forms.reduce((sum, f) => sum + f.responseCount, 0);
+  const totalResponses = forms.reduce((sum, f) => sum + (f.responseCount || 0), 0);
   const responseLimit = 10;
 
   return (
-    <aside className="w-[272px] shrink-0 bg-white border-r border-[#e4e4e7] flex flex-col h-full">
+    <aside className="w-full md:w-[272px] shrink-0 bg-white border-b md:border-b-0 md:border-r border-[#e4e4e7] flex flex-col md:h-full pb-4 md:pb-0">
       {/* Create form button */}
       <div className="px-4 pt-4 pb-3 shrink-0">
         <button
           onClick={handleCreateForm}
-          className="w-full flex items-center justify-center gap-2 bg-[#1a1a1a] hover:bg-[#2d2d2d] text-white rounded-lg py-2.5 text-sm font-medium transition-colors"
+          className="w-full flex items-center justify-center gap-2 bg-[#1a1a1a] hover:bg-[#2d2d2d] text-white rounded-lg py-2.5 text-sm font-medium transition-colors cursor-pointer"
           id="create-form-btn"
         >
           <IconPlus size={14} />
@@ -69,7 +69,7 @@ export function LeftSidebar({ activeWorkspace = 'my-workspace' }: LeftSidebarPro
             <IconWorkspaces size={14} />
             Workspaces
           </div>
-          <button className="p-0.5 text-[#847E85] hover:text-[#3C323E] hover:bg-[#f7f5f8] rounded transition-colors">
+          <button className="p-0.5 text-[#847E85] hover:text-[#3C323E] hover:bg-[#f7f5f8] rounded transition-colors cursor-pointer">
             <IconPlus size={14} />
           </button>
         </div>
@@ -78,7 +78,7 @@ export function LeftSidebar({ activeWorkspace = 'my-workspace' }: LeftSidebarPro
         <div className="mt-1">
           <button
             onClick={() => setPrivateOpen((p) => !p)}
-            className="flex items-center justify-between w-full px-1 py-1.5 text-sm text-[#3C323E] hover:bg-[#f7f5f8] rounded-lg transition-colors group"
+            className="flex items-center justify-between w-full px-1 py-1.5 text-sm text-[#3C323E] hover:bg-[#f7f5f8] rounded-lg transition-colors group cursor-pointer"
           >
             <span className="font-medium">Private</span>
             <span
@@ -95,7 +95,7 @@ export function LeftSidebar({ activeWorkspace = 'my-workspace' }: LeftSidebarPro
             <div className="mt-0.5 ml-1">
               <button
                 className={cn(
-                  'flex items-center justify-between w-full px-2 py-2 rounded-lg text-sm transition-colors',
+                  'flex items-center justify-between w-full px-2 py-2 rounded-lg text-sm transition-colors cursor-pointer',
                   activeWorkspace === 'my-workspace'
                     ? 'bg-[#f0eef1] text-[#3C323E] font-medium'
                     : 'text-[#655D67] hover:bg-[#f7f5f8]'
@@ -130,14 +130,14 @@ export function LeftSidebar({ activeWorkspace = 'my-workspace' }: LeftSidebarPro
           <p className="text-xs text-[#847E85] mt-1">
             {totalResponses} / {responseLimit}
           </p>
-          <button className="mt-1.5 text-xs text-[#655D67] border border-[#e4e4e7] rounded-full px-2.5 py-1 hover:bg-[#f7f5f8] transition-colors">
+          <button className="mt-1.5 text-xs text-[#655D67] border border-[#e4e4e7] rounded-full px-2.5 py-1 hover:bg-[#f7f5f8] transition-colors cursor-pointer">
             Increase response limit
           </button>
         </div>
 
         {/* AI chat input */}
         <div className="flex items-center gap-2 border border-[#e4e4e7] rounded-xl px-3 py-2.5 bg-white focus-within:border-[#c8c4c9] transition-colors">
-          <button className="text-[#847E85] hover:text-[#3C323E] transition-colors shrink-0">
+          <button className="text-[#847E85] hover:text-[#3C323E] transition-colors shrink-0 cursor-pointer">
             <IconMic size={15} />
           </button>
           <input
@@ -146,7 +146,7 @@ export function LeftSidebar({ activeWorkspace = 'my-workspace' }: LeftSidebarPro
             className="flex-1 text-xs text-[#3C323E] placeholder:text-[#847E85] outline-none bg-transparent"
             id="ai-chat-input"
           />
-          <button className="text-[#c4c1c5] hover:text-[#655D67] transition-colors shrink-0">
+          <button className="text-[#c4c1c5] hover:text-[#655D67] transition-colors shrink-0 cursor-pointer">
             <IconSend size={14} />
           </button>
         </div>

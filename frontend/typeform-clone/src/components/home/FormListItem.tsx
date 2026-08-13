@@ -90,7 +90,7 @@ export function FormListItem({ form, onRename }: FormListItemProps) {
 
       {/* Completed column */}
       <div className="w-28 shrink-0 text-sm text-[#3C323E] text-center">
-        {form.completionRate ?? '–'}
+        {form.completedCount > 0 ? form.completedCount : '–'}
       </div>
 
       {/* Updated column */}
@@ -103,7 +103,7 @@ export function FormListItem({ form, onRename }: FormListItemProps) {
         <button
           onClick={(e) => e.stopPropagation()}
           className={cn(
-            'p-1.5 rounded-md transition-colors',
+            'p-1.5 rounded-md transition-colors cursor-pointer',
             isHovered
               ? 'text-[#655D67] hover:bg-[#f0eef1]'
               : 'text-transparent'
@@ -127,7 +127,7 @@ export function FormListItem({ form, onRename }: FormListItemProps) {
             align="right"
             trigger={
               <button
-                className="p-1.5 rounded-md text-[#655D67] hover:bg-[#f0eef1] transition-colors"
+                className="p-1.5 rounded-md text-[#655D67] hover:bg-[#f0eef1] transition-colors cursor-pointer"
                 title="More options"
                 id={`form-menu-${form.id}`}
               >
