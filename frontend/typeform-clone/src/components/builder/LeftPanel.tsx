@@ -401,20 +401,16 @@ export function LeftPanel({ form }: LeftPanelProps) {
                           <div className={cn(hasChildren ? "px-1 space-y-0 relative mt-1" : "space-y-0 relative")}>
                             {!isDraggingPageBlock && <DropIndicator id={`drop-before-child-${page.parent.id}`} />}
                             
-                            {/* Only show parent as a list item when it has no children (standalone question).
-                               When it has children, the page title is the PageHeader above. */}
-                            {!hasChildren && (
-                              <div className={cn(activeDragId === page.parent.id ? 'opacity-0 h-0 p-0 m-0 overflow-hidden border-none' : '')}>
-                                <QuestionListItem
-                                  question={page.parent}
-                                  badgeText={String(pIndex + 1)}
-                                  isSelected={page.parent.id === selectedQuestionId}
-                                  onSelect={() => handleSelectQuestion(page.parent.id)}
-                                  onDelete={() => handleDeleteQuestion(page.parent.id)}
-                                  onDuplicate={() => duplicateQuestion(form.id, page.parent.id)}
-                                />
-                              </div>
-                            )}
+                            <div className={cn(activeDragId === page.parent.id ? 'opacity-0 h-0 p-0 m-0 overflow-hidden border-none' : '')}>
+                              <QuestionListItem
+                                question={page.parent}
+                                badgeText={String(pIndex + 1)}
+                                isSelected={page.parent.id === selectedQuestionId}
+                                onSelect={() => handleSelectQuestion(page.parent.id)}
+                                onDelete={() => handleDeleteQuestion(page.parent.id)}
+                                onDuplicate={() => duplicateQuestion(form.id, page.parent.id)}
+                              />
+                            </div>
                             
                             {hasChildren && page.children.map((child, cIndex) => {
                               const isChildDragging = activeDragId === child.id;

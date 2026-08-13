@@ -195,53 +195,18 @@ export function RightSettingsPanel({ form, selectedQuestion }: RightSettingsPane
   const patch = (p: Parameters<typeof updateQuestion>[2]) =>
     updateQuestion(form.id, q.id, p);
 
-  // A question is a "page parent" if any other question has parentId === q.id
-  const isPageParent = form.questions.some(fq => fq.parentId === q.id);
+
 
   return (
     <aside className="w-[300px] shrink-0 bg-white flex flex-col h-full overflow-hidden text-[#655D67] px-4 pb-4 pt-0 mt-3">
       <div className="flex-1 space-y-4">
-        
-        {/* Question Block — only shown for page-parent questions */}
-        {isPageParent && (
-          <div className="bg-[#F7F7F8] rounded-2xl border-none p-4">
-            <div className="flex items-center gap-1.5 mb-3">
-              <span className="text-[13px] font-semibold text-[#3C323E]">Question</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#847E85" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-            </div>
-            <div className="flex items-center bg-[#e4e4e7] rounded-lg p-0.5">
-              <button className="flex-1 flex items-center justify-center gap-2 bg-white rounded-md py-1.5 shadow-sm text-[13px] font-medium text-[#3C323E]">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 9h16M4 15h16"/></svg>
-                Text
-              </button>
-              <button 
-                onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))}
-                className="flex-1 flex items-center justify-center gap-2 text-[13px] font-medium text-[#847E85] hover:text-[#3C323E] transition-colors py-1.5"
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
-                Video
-              </button>
-            </div>
-          </div>
-        )}
 
-        {/* Answer Block — simplified for page title, full for regular questions */}
-        {isPageParent ? (
-          <div className="bg-[#F7F7F8] rounded-2xl border-none p-4">
-            <label className="block text-[13px] font-semibold text-[#3C323E] mb-4">Answer</label>
-            <div className="flex items-center justify-between">
-              <span className="text-[13px] font-medium text-[#3C323E]">Image or video</span>
-              <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="w-8 h-8 rounded-lg border border-[#e4e4e7] flex items-center justify-center bg-white hover:border-[#c8c4c9] hover:bg-[#faf9fa] transition-colors cursor-pointer">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#655D67" strokeWidth="2"><path d="M12 5v14M5 12h14"/></svg>
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div className="bg-[#F7F7F8] rounded-2xl border-none p-4">
-            {(q.type === 'short_text' || q.type === 'long_text') && (
-              <label className="block text-[13px] font-semibold text-[#3C323E] mb-3">Answer</label>
-            )}
-            <QuestionTypeSelect q={q} patch={patch} />
+        {/* Question Settings */}
+        <div className="bg-[#F7F7F8] rounded-2xl border-none p-4">
+          {(q.type === 'short_text' || q.type === 'long_text') && (
+            <label className="block text-[13px] font-semibold text-[#3C323E] mb-3">Answer</label>
+          )}
+          <QuestionTypeSelect q={q} patch={patch} />
 
           <div className="space-y-4">
             <SwitchRow
@@ -370,8 +335,7 @@ export function RightSettingsPanel({ form, selectedQuestion }: RightSettingsPane
               </button>
             </div>
           </div>
-          </div>
-        )}
+        </div>
 
         {/* Branching Block */}
         <div className="bg-[#F7F7F8] rounded-2xl border-none p-4 flex items-center justify-between">

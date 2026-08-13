@@ -177,79 +177,68 @@ export function CenterCanvas({ form }: CenterCanvasProps) {
           const firstQ = activePage[0];
           const hasPageHeader = activePage.length >= 2;
 
-          return pages.map((page, pageIndex) => {
-            const firstQ = page[0];
-            const hasPageHeader = page.length >= 2;
-            const isActivePage = actualPageIndex === pageIndex;
-
-            return (
-              <div key={`page-${pageIndex}`} className="flex flex-col mb-8 relative">
-                {/* Page Header (only if grouped) */}
-                {hasPageHeader && firstQ && (
-                  <div
-                    onClick={() => setSelectedQuestionId(firstQ.id)}
-                    className={`py-8 border-b border-[#e4e4e7]/50 mb-4 transition-all duration-200 cursor-text rounded-xl px-3 -mx-3 ${
-                      selectedQuestionId === firstQ.id ? 'bg-white/60 ring-1 ring-[#e4e4e7]' : 'hover:bg-white/40'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="flex items-center justify-center w-6 h-6 rounded-md shrink-0 bg-[#3C323E] text-white text-xs font-bold">
-                        {pageIndex + 1}
-                      </div>
+          return (
+            <div className="flex flex-col mb-8 relative">
+              {/* Page Header (only if grouped) */}
+              {hasPageHeader && firstQ && (
+                <div
+                  onClick={() => setSelectedQuestionId(firstQ.id)}
+                  className={`py-8 border-b border-[#e4e4e7]/50 mb-4 transition-all duration-200 cursor-text rounded-xl px-3 -mx-3 ${
+                    selectedQuestionId === firstQ.id ? 'bg-white/60 ring-1 ring-[#e4e4e7]' : 'hover:bg-white/40'
+                  }`}
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="flex items-center justify-center w-6 h-6 rounded-md shrink-0 bg-[#3C323E] text-white text-xs font-bold">
+                      {actualPageIndex + 1}
                     </div>
-                    <input
-                      type="text"
-                      value={firstQ.settings.pageTitle ?? ''}
-                      onFocus={() => setSelectedQuestionId(firstQ.id)}
-                      onChange={(e) => {
-                        e.stopPropagation();
-                        updateQuestion(form.id, firstQ.id, {
-                          settings: { ...firstQ.settings, pageTitle: e.target.value }
-                        });
-                      }}
-                      placeholder="Page Title"
-                      className="w-full text-xl font-medium text-[#3C323E] bg-transparent placeholder:text-[#c4c1c5] outline-none focus:outline-none mb-2 cursor-text"
-                    />
-                    <input
-                      type="text"
-                      value={firstQ.settings.pageDescription ?? ''}
-                      onFocus={() => setSelectedQuestionId(firstQ.id)}
-                      onChange={(e) => {
-                        e.stopPropagation();
-                        updateQuestion(form.id, firstQ.id, {
-                          settings: { ...firstQ.settings, pageDescription: e.target.value }
-                        });
-                      }}
-                      placeholder="Page Description (optional)"
-                      className="w-full text-sm text-[#655D67] bg-transparent placeholder:text-[#c4c1c5] outline-none focus:outline-none cursor-text"
-                    />
                   </div>
-                )}
+                  <input
+                    type="text"
+                    value={firstQ.settings.pageTitle ?? ''}
+                    onFocus={() => setSelectedQuestionId(firstQ.id)}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      updateQuestion(form.id, firstQ.id, {
+                        settings: { ...firstQ.settings, pageTitle: e.target.value }
+                      });
+                    }}
+                    placeholder="Page Title"
+                    className="w-full text-xl font-medium text-[#3C323E] bg-transparent placeholder:text-[#c4c1c5] outline-none focus:outline-none mb-2 cursor-text"
+                  />
+                  <input
+                    type="text"
+                    value={firstQ.settings.pageDescription ?? ''}
+                    onFocus={() => setSelectedQuestionId(firstQ.id)}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      updateQuestion(form.id, firstQ.id, {
+                        settings: { ...firstQ.settings, pageDescription: e.target.value }
+                      });
+                    }}
+                    placeholder="Page Description (optional)"
+                    className="w-full text-sm text-[#655D67] bg-transparent placeholder:text-[#c4c1c5] outline-none focus:outline-none cursor-text"
+                  />
+                </div>
+              )}
 
-                {/* Page Questions */}
-                {page.map((question) => {
-                    const isSelected = question.id === selectedQuestionId;
-                    return (
-                      <QuestionCard
-                        key={question.id}
-                        ref={isSelected ? selectedRef : undefined}
-                        question={question}
-                        formId={form.id}
-                        isSelected={isSelected}
-                        onClick={() => setSelectedQuestionId(question.id)}
-                        isChild={hasPageHeader}
-                        pageIndex={pageIndex}
-                      />
-                    );
-                  })}
-                  
-                  {/* Visual separator between independent pages */}
-                  {pageIndex < pages.length - 1 && (
-                    <div className="h-px bg-[#e4e4e7] w-full my-8 absolute bottom-[-32px] left-0" />
-                  )}
-              </div>
-            );
-          });
+              {/* Page Questions */}
+              {activePage.map((question) => {
+                  const isSelected = question.id === selectedQuestionId;
+                  return (
+                    <QuestionCard
+                      key={question.id}
+                      ref={isSelected ? selectedRef : undefined}
+                      question={question}
+                      formId={form.id}
+                      isSelected={isSelected}
+                      onClick={() => setSelectedQuestionId(question.id)}
+                      isChild={hasPageHeader}
+                      pageIndex={actualPageIndex}
+                    />
+                  );
+                })}
+            </div>
+          );
         })()}
               </div>
               {/* Bottom padding so last card isn't cut off */}

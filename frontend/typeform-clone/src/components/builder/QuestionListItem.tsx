@@ -7,6 +7,7 @@ import type { Question } from '@/types';
 import { QUESTION_TYPE_META, getLetterIndex } from '@/lib/utils';
 import { IconDotsVertical, IconTrash, IconDuplicate, IconChevronUp, IconChevronDown } from '@/components/icons';
 import { cn } from '@/lib/utils';
+import { Dropdown, DropdownItem, DropdownSeparator } from '@/components/ui/Dropdown';
 
 interface QuestionListItemProps {
   question: Question;
@@ -109,54 +110,43 @@ export function QuestionListItem({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative">
-          <button
-            onClick={() => setMenuOpen((o) => !o)}
-            className="p-1 rounded-md text-[#847E85] hover:text-[#3C323E] hover:bg-[#f0eef1] transition-colors"
-            aria-label="Question options"
+          <Dropdown
+            trigger={
+              <button
+                className="opacity-0 group-hover:opacity-100 p-1 rounded-md text-[#847E85] hover:bg-[#e4e4e7] transition-all"
+                title="Options"
+              >
+                <IconDotsVertical size={16} />
+              </button>
+            }
           >
-            <IconDotsVertical size={14} />
-          </button>
-
-          {menuOpen && (
-            <div
-              className="absolute left-0 top-full mt-1 z-50 bg-white border border-[#e4e4e7] rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] py-1.5 w-[160px]"
-              onMouseLeave={() => setMenuOpen(false)}
+            <DropdownItem
+              onClick={() => onMoveUp?.()}
+              icon={<IconChevronUp size={14} />}
             >
-              <button
-                onClick={(e) => { e.stopPropagation(); onMoveUp?.(); setMenuOpen(false); }}
-                className="w-full flex items-center gap-3 px-3 py-1.5 text-sm text-[#655D67] hover:bg-[#f7f5f8] transition-colors"
-              >
-                <IconChevronUp size={14} />
-                Move up
-              </button>
-              <button
-                onClick={(e) => { e.stopPropagation(); onMoveDown?.(); setMenuOpen(false); }}
-                className="w-full flex items-center gap-3 px-3 py-1.5 text-sm text-[#655D67] hover:bg-[#f7f5f8] transition-colors"
-              >
-                <IconChevronDown size={14} />
-                Move down
-              </button>
-              <button
-                onClick={(e) => { e.stopPropagation(); onDuplicate?.(); setMenuOpen(false); }}
-                className="w-full flex items-center gap-3 px-3 py-1.5 text-sm text-[#655D67] hover:bg-[#f7f5f8] transition-colors"
-              >
-                <IconDuplicate size={14} />
-                Duplicate
-              </button>
-              <div className="h-px bg-[#e4e4e7] my-1.5 mx-1" />
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onDelete();
-                  setMenuOpen(false);
-                }}
-                className="w-full flex items-center gap-3 px-3 py-1.5 text-sm text-[#933b28] hover:bg-[#fdf2ef] transition-colors"
-              >
-                <IconTrash size={14} strokeWidth={1.5} />
-                Delete
-              </button>
-            </div>
-          )}
+              Move up
+            </DropdownItem>
+            <DropdownItem
+              onClick={() => onMoveDown?.()}
+              icon={<IconChevronDown size={14} />}
+            >
+              Move down
+            </DropdownItem>
+            <DropdownItem
+              onClick={() => onDuplicate?.()}
+              icon={<IconDuplicate size={14} />}
+            >
+              Duplicate
+            </DropdownItem>
+            <DropdownSeparator />
+            <DropdownItem
+              onClick={onDelete}
+              icon={<IconTrash size={14} strokeWidth={1.5} />}
+              danger
+            >
+              Delete
+            </DropdownItem>
+          </Dropdown>
         </div>
       </div>
     </div>
