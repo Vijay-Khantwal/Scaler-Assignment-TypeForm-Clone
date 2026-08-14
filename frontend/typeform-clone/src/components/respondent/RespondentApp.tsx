@@ -254,7 +254,7 @@ export function RespondentApp({ form, isPreview = false, onClose }: RespondentAp
                         onChange={(v) => handleAnswer(q.id, v)}
                         onNext={() => {
                           if (qIndex === currentPage.length - 1) {
-                            handleNext();
+                            handleNextRef.current();
                           }
                         }}
                       />
@@ -318,26 +318,26 @@ export function RespondentApp({ form, isPreview = false, onClose }: RespondentAp
         <button
           onClick={handlePrev}
           disabled={currentIdx === 0}
-          className={`w-8 h-8 flex items-center justify-center rounded-md border transition-colors ${
+          className={`w-12 h-12 flex items-center justify-center rounded-md border transition-colors ${
             currentIdx === 0
               ? 'text-[#c4c1c5] border-[#e4e4e7] cursor-not-allowed bg-white'
-              : 'text-[#3C323E] border-[#e4e4e7] hover:bg-[#f2f0f3] bg-white'
+              : 'text-[#3C323E] border-[#e4e4e7] hover:bg-[#f2f0f3] bg-white cursor-pointer'
           }`}
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="m18 15-6-6-6 6"/>
           </svg>
         </button>
         <button
           onClick={handleNext}
           disabled={isFinished}
-          className={`w-8 h-8 flex items-center justify-center rounded-md border transition-colors ${
+          className={`w-12 h-12 flex items-center justify-center rounded-md border transition-colors ${
             isFinished
               ? 'text-[#c4c1c5] border-[#e4e4e7] cursor-not-allowed bg-white'
-              : 'text-[#3C323E] border-[#e4e4e7] hover:bg-[#f2f0f3] bg-white'
+              : 'text-[#3C323E] border-[#e4e4e7] hover:bg-[#f2f0f3] bg-white cursor-pointer'
           }`}
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="m6 9 6 6 6-6"/>
           </svg>
         </button>
@@ -423,7 +423,7 @@ function QuestionInput({
                   onChange(opt.label);
                   setTimeout(onNext, 400);
                 }}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg border text-left transition-all text-sm ${
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg border text-left transition-all text-sm cursor-pointer ${
                   isSelected
                     ? 'border-[#3C323E] bg-[#3C323E]/5'
                     : 'border-[#e4e4e7] bg-white hover:bg-[#f7f5f8]'
@@ -475,7 +475,7 @@ function QuestionInput({
                     <button
                       key={opt.id}
                       onClick={() => { onChange(opt.label); setDropdownOpen(false); setDropdownSearch(''); }}
-                      className={`w-full text-left px-4 py-2.5 text-sm hover:bg-[#f7f5f8] transition-colors ${value === opt.label ? 'text-[#3C323E] font-medium bg-[#f7f5f8]' : 'text-[#655D67]'}`}
+                      className={`w-full text-left px-4 py-2.5 text-sm hover:bg-[#f7f5f8] transition-colors cursor-pointer ${value === opt.label ? 'text-[#3C323E] font-medium bg-[#f7f5f8]' : 'text-[#655D67]'}`}
                     >
                       {opt.label}
                     </button>
@@ -497,7 +497,7 @@ function QuestionInput({
               <button
                 key={label}
                 onClick={() => { onChange(label); setTimeout(onNext, 400); }}
-                className={`flex items-center gap-3 w-full border rounded-lg px-2.5 py-2.5 text-lg font-medium transition-all ${
+                className={`flex items-center gap-3 w-full border rounded-lg px-2.5 py-2.5 text-lg font-medium transition-all cursor-pointer ${
                   isSelected ? 'border-[#3C323E] bg-[#3C323E]/5 text-[#3C323E]' : 'border-transparent bg-[#f0eeef] text-[#3C323E] hover:border-[#c8c4c9]'
                 }`}
               >
@@ -530,7 +530,7 @@ function QuestionInput({
                   <button
                     type="button"
                     onClick={() => { onChange(i + 1); setTimeout(onNext, 400); }}
-                    className={`text-4xl transition-transform hover:scale-110 ${
+                    className={`text-4xl transition-transform hover:scale-110 cursor-pointer ${
                       isSelected ? "text-[#3C323E]" : "text-[#c4c1c5] hover:text-[#847E85]"
                     }`}
                   >

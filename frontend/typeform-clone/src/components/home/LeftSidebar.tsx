@@ -69,7 +69,7 @@ export function LeftSidebar({ activeWorkspace = 'my-workspace' }: LeftSidebarPro
             <IconWorkspaces size={14} />
             Workspaces
           </div>
-          <button className="p-0.5 text-[#847E85] hover:text-[#3C323E] hover:bg-[#f7f5f8] rounded transition-colors cursor-pointer">
+          <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="p-0.5 text-[#847E85] hover:text-[#3C323E] hover:bg-[#f7f5f8] rounded transition-colors cursor-pointer">
             <IconPlus size={14} />
           </button>
         </div>
@@ -130,14 +130,14 @@ export function LeftSidebar({ activeWorkspace = 'my-workspace' }: LeftSidebarPro
           <p className="text-xs text-[#847E85] mt-1">
             {totalResponses} / {responseLimit}
           </p>
-          <button className="mt-1.5 text-xs text-[#655D67] border border-[#e4e4e7] rounded-full px-2.5 py-1 hover:bg-[#f7f5f8] transition-colors cursor-pointer">
+          <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="mt-1.5 text-xs text-[#655D67] border border-[#e4e4e7] rounded-full px-2.5 py-1 hover:bg-[#f7f5f8] transition-colors cursor-pointer">
             Increase response limit
           </button>
         </div>
 
         {/* AI chat input */}
         <div className="flex items-center gap-2 border border-[#e4e4e7] rounded-xl px-3 py-2.5 bg-white focus-within:border-[#c8c4c9] transition-colors">
-          <button className="text-[#847E85] hover:text-[#3C323E] transition-colors shrink-0 cursor-pointer">
+          <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="text-[#847E85] hover:text-[#3C323E] transition-colors shrink-0 cursor-pointer">
             <IconMic size={15} />
           </button>
           <input
@@ -146,7 +146,7 @@ export function LeftSidebar({ activeWorkspace = 'my-workspace' }: LeftSidebarPro
             className="flex-1 text-xs text-[#3C323E] placeholder:text-[#847E85] outline-none bg-transparent"
             id="ai-chat-input"
           />
-          <button className="text-[#c4c1c5] hover:text-[#655D67] transition-colors shrink-0 cursor-pointer">
+          <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="text-[#c4c1c5] hover:text-[#655D67] transition-colors shrink-0 cursor-pointer">
             <IconSend size={14} />
           </button>
         </div>

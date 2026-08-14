@@ -61,18 +61,18 @@ export default function DashboardPage() {
                 <h1 className="text-xl font-semibold text-[#3C323E]">
                   My workspace
                 </h1>
-                <button className="p-1 text-[#847E85] hover:text-[#655D67] hover:bg-[#f0eef1] rounded-md transition-colors cursor-pointer">
+                <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="p-1 text-[#847E85] hover:text-[#655D67] hover:bg-[#f0eef1] rounded-md transition-colors cursor-pointer">
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                     <path fill="currentColor" fillRule="evenodd" clipRule="evenodd" d="M6.5 3a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0m0 5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0m0 5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0" />
                   </svg>
                 </button>
-                <button className="flex items-center gap-1.5 text-sm text-[#655D67] hover:text-[#3C323E] transition-colors cursor-pointer">
+                <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="flex items-center gap-1.5 text-sm text-[#655D67] hover:text-[#3C323E] transition-colors cursor-pointer">
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                     <path fill="currentColor" fillRule="evenodd" clipRule="evenodd" d="M8 1a.75.75 0 0 1 .75.75v5.5h5.5a.75.75 0 0 1 0 1.5h-5.5v5.5a.75.75 0 0 1-1.5 0v-5.5h-5.5a.75.75 0 0 1 0-1.5h5.5v-5.5A.75.75 0 0 1 8 1z" />
                   </svg>
                   Invite
                 </button>
-                <button className="p-1 text-[#c4c1c5] hover:text-[#655D67] transition-colors cursor-pointer">
+                <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="p-1 text-[#c4c1c5] hover:text-[#655D67] transition-colors cursor-pointer">
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                     <path fill="currentColor" d="M8 1.5A6.5 6.5 0 1 0 14.5 8 6.508 6.508 0 0 0 8 1.5zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" fillRule="evenodd" clipRule="evenodd" />
                   </svg>
@@ -81,7 +81,7 @@ export default function DashboardPage() {
 
               {/* Sort + View controls */}
               <div className="flex items-center gap-2">
-                <button className="flex items-center gap-1.5 text-sm text-[#655D67] border border-[#e4e4e7] rounded-lg px-3 py-1.5 hover:bg-white transition-colors bg-white cursor-pointer">
+                <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="flex items-center gap-1.5 text-sm text-[#655D67] border border-[#e4e4e7] rounded-lg px-3 py-1.5 hover:bg-white transition-colors bg-white cursor-pointer">
                   <IconFilter size={13} strokeWidth={1.5} />
                   Date created
                   <svg width="12" height="12" viewBox="0 0 16 16" fill="none">

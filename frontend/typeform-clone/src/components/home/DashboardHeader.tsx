@@ -70,21 +70,21 @@ export function DashboardHeader({ activeTab = 'forms' }: DashboardHeaderProps) {
 
         {/* Right: actions */}
         <div className="flex items-center gap-1">
-          <button className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-[#655D67] hover:bg-[#f7f5f8] rounded-lg transition-colors cursor-pointer">
+          <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-[#655D67] hover:bg-[#f7f5f8] rounded-lg transition-colors cursor-pointer">
             <IconIntegrations size={14} />
             <span className="hidden sm:inline">Integrations</span>
           </button>
-          <button className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-[#655D67] hover:bg-[#f7f5f8] rounded-lg transition-colors cursor-pointer">
+          <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-[#655D67] hover:bg-[#f7f5f8] rounded-lg transition-colors cursor-pointer">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
               <path fill="currentColor" d="M2.55 4.041c-.363-1.45 1.143-2.658 2.48-1.99l8.766 4.384c1.29.645 1.29 2.485 0 3.13L5.03 13.95c-1.337.668-2.843-.54-2.48-1.99L3.54 8zM4.898 8.75l-.893 3.573a.25.25 0 0 0 .354.284l8.767-4.383a.25.25 0 0 0 0-.448L4.359 3.393a.25.25 0 0 0-.354.284l.893 3.573h1.758a.75.75 0 0 1 0 1.5z" fillRule="evenodd" clipRule="evenodd"/>
             </svg>
             <span className="hidden sm:inline">Brand kit</span>
           </button>
-          <button className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-[#196042] hover:bg-[#145236] rounded-lg transition-colors cursor-pointer">
+          <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-[#196042] hover:bg-[#145236] rounded-lg transition-colors cursor-pointer">
             <span className="hidden sm:inline">View plans</span>
             <span className="sm:hidden">Plans</span>
           </button>
-          <button className="p-1.5 text-[#847E85] hover:text-[#655D67] hover:bg-[#f7f5f8] rounded-lg transition-colors ml-0.5 cursor-pointer shrink-0">
+          <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="p-1.5 text-[#847E85] hover:text-[#655D67] hover:bg-[#f7f5f8] rounded-lg transition-colors ml-0.5 cursor-pointer shrink-0">
             <IconHelp size={15} />
           </button>
           {/* User avatar */}
@@ -100,6 +100,11 @@ export function DashboardHeader({ activeTab = 'forms' }: DashboardHeaderProps) {
           <div key={tab.id} className="relative h-full flex items-center">
             {tab.id === 'research' && <div className="absolute left-[-5px] top-1/2 -translate-y-1/2 w-px h-5 bg-[#e4e4e7]" />}
             <button
+              onClick={() => {
+                if (tab.id !== 'forms') {
+                  import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }));
+                }
+              }}
               className={cn(
                 'flex items-center gap-2 px-3 py-1.5 text-sm transition-colors rounded-lg cursor-pointer',
                 tab.id === 'research' ? 'ml-2' : '',

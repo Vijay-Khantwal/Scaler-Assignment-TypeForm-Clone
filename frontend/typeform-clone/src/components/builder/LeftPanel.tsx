@@ -434,20 +434,23 @@ export function LeftPanel({ form }: LeftPanelProps) {
                             {!isDraggingPageBlock && <DropIndicator id={`drop-after-child-${hasChildren && page.children.length > 0 ? page.children[page.children.length - 1].id : page.parent.id}`} />}
                           </div>
                           
-                            <div className="px-1 pb-1 pt-1 mt-1 mx-1">
-                              <button
-                                onClick={() => {
-                                  if (setTargetParentIdForNewQuestion) {
-                                    setTargetParentIdForNewQuestion(page.parent.id);
-                                  }
-                                  setAddContentModalOpen(true);
-                                }}
-                                className="w-full flex items-center justify-center gap-1.5 text-[13px] font-medium text-[#655D67] hover:text-[#3C323E] bg-[#f0eeef] hover:bg-[#e4e4e7] rounded-lg transition-colors py-2 cursor-pointer"
-                              >
-                                <IconPlus size={14} />
-                                Add content
-                              </button>
-                            </div>
+                            {/* Only show Add content on active page */}
+                            {(selectedQuestionId === page.parent.id || page.children.some(c => c.id === selectedQuestionId)) && (
+                              <div className="px-1 pb-1 pt-1 mt-1 mx-1">
+                                <button
+                                  onClick={() => {
+                                    if (setTargetParentIdForNewQuestion) {
+                                      setTargetParentIdForNewQuestion(page.parent.id);
+                                    }
+                                    setAddContentModalOpen(true);
+                                  }}
+                                  className="w-full flex items-center justify-center gap-1.5 text-[13px] font-medium text-[#655D67] hover:text-[#3C323E] bg-[#f0eeef] hover:bg-[#e4e4e7] rounded-lg transition-colors py-2 cursor-pointer"
+                                >
+                                  <IconPlus size={14} />
+                                  Add content
+                                </button>
+                              </div>
+                            )}
                           
                         </div>
                         <DropIndicator id={`drop-after-page-${page.parent.id}`} />
