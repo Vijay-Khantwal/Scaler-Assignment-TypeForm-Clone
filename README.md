@@ -1,39 +1,48 @@
-# Typeform Clone
+<div align="center">
+  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=FastAPI&logoColor=white" alt="FastAPI" />
+  <img src="https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite" />
 
-A full-stack Typeform-inspired form builder built as a Scaler assignment. Create multi-page forms with drag-and-drop reordering, real-time respondent view, and a results dashboard — all with a polished, pixel-close UI.
-
----
-
-## Features
-
-- **Form Builder** — drag-and-drop question reordering, multi-page grouping, inline editing
-- **Question Types** — Short text, Long text, Multiple choice, Dropdown, Email, Number, Yes/No, Rating
-- **Right Panel Settings** — per-question configuration (required, max length, randomize, etc.)
-- **Respondent View** — keyboard-navigable form flow with animated transitions
-- **Results Dashboard** — response table with completion metrics
-- **Preview Mode** — live in-builder preview before publishing
-- **Mobile / Desktop canvas toggle** — switch canvas aspect ratio in the builder
-- **Publish & Share** — generate a shareable link with one click
+  <h1 align="center">Typeform Clone 🚀</h1>
+  <p align="center">
+    A full-stack Typeform-inspired form builder built as a Scaler assignment. Create multi-page forms with drag-and-drop reordering, real-time respondent view, and a results dashboard — all with a polished, pixel-close UI.
+  </p>
+</div>
 
 ---
 
-## Tech Stack
+## ✨ Features
+
+- 🏗️ **Form Builder** — drag-and-drop question reordering, multi-page grouping, inline editing
+- 📝 **Question Types** — Short text, Long text, Multiple choice, Dropdown, Email, Number, Yes/No, Rating
+- ⚙️ **Right Panel Settings** — per-question configuration (required, max length, randomize, etc.)
+- 🏃‍♂️ **Respondent View** — keyboard-navigable form flow with animated transitions
+- 📊 **Results Dashboard** — response table with completion metrics
+- 👀 **Preview Mode** — live in-builder preview before publishing
+- 📱 **Mobile / Desktop Canvas** — switch canvas aspect ratio in the builder instantly
+- 🔗 **Publish & Share** — generate a shareable link with one click
+
+---
+
+## 🛠️ Tech Stack
 
 | Layer | Technology |
 |---|---|
-| Frontend | Next.js 16 (App Router), React 19, TypeScript |
-| Styling | Tailwind CSS v4 |
-| State | Zustand |
-| DnD | @dnd-kit/core + @dnd-kit/sortable |
-| Animations | Framer Motion |
-| Backend | FastAPI (Python) |
-| Database | SQLite via SQLAlchemy |
+| **Frontend** | Next.js 16 (App Router), React 19, TypeScript |
+| **Styling** | Tailwind CSS v4 |
+| **State** | Zustand |
+| **DnD** | @dnd-kit/core + @dnd-kit/sortable |
+| **Animations**| Framer Motion |
+| **Backend** | FastAPI (Python) |
+| **Database** | SQLite via SQLAlchemy |
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
-```
+```text
 typeform-clone/
 ├── backend/              # FastAPI REST API
 │   ├── main.py           # Route definitions
@@ -58,9 +67,9 @@ typeform-clone/
 
 ---
 
-## Setup Guide
+## 🚀 Setup Guide
 
-### Prerequisites
+### 📋 Prerequisites
 
 - **Node.js** ≥ 18
 - **Python** ≥ 3.10
@@ -68,7 +77,7 @@ typeform-clone/
 
 ---
 
-### 1 — Backend
+### 1️⃣ Backend Setup
 
 ```bash
 # Navigate to the backend directory
@@ -97,7 +106,7 @@ Interactive docs: **http://localhost:8000/docs**
 
 ---
 
-### 2 — Frontend
+### 2️⃣ Frontend Setup
 
 ```bash
 # Navigate to the frontend directory
@@ -114,7 +123,7 @@ The app will be available at **http://localhost:3000**.
 
 ---
 
-### Environment Variables
+### 🔐 Environment Variables
 
 Create a `.env.local` file inside `frontend/typeform-clone/` if you need to override the API base URL:
 
@@ -122,11 +131,11 @@ Create a `.env.local` file inside `frontend/typeform-clone/` if you need to over
 NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
 
-> No secrets are required to run the project locally.
+> **Note**: No secrets are required to run the project locally.
 
 ---
 
-## Available Scripts (Frontend)
+## 📜 Available Scripts (Frontend)
 
 | Script | Description |
 |---|---|
@@ -137,6 +146,6 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 
 ---
 
-## License
+## 📄 License
 
-MIT
+MIT License

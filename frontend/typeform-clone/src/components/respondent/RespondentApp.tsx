@@ -253,7 +253,7 @@ export function RespondentApp({ form, isPreview = false, onClose }: RespondentAp
                         value={answers[q.id]}
                         onChange={(v) => handleAnswer(q.id, v)}
                         onNext={() => {
-                          if (qIndex === currentPage.length - 1) {
+                          if (qIndex === currentPage.length - 1 && currentIdx !== pages.length - 1) {
                             handleNextRef.current();
                           }
                         }}
