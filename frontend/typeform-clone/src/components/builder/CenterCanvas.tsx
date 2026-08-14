@@ -706,7 +706,7 @@ function SortableOptionsList({
             e.stopPropagation();
             addOptionToQuestion(formId, question.id);
           }}
-          className="flex items-center gap-1.5 text-sm text-[#655D67] hover:text-[#3C323E] transition-colors mt-1"
+          className="flex items-center gap-1.5 text-sm text-[#655D67] hover:text-[#3C323E] transition-colors mt-1 cursor-pointer"
         >
           <IconPlus size={13} />
           Add choice
