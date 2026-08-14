@@ -80,7 +80,7 @@ export function BuilderHeader({ form, activeTab = 'content', onTabChange, onPubl
         />
 
         {/* Center: tabs */}
-        <nav className="order-3 md:order-none w-full md:w-auto mt-2 md:mt-0 md:absolute md:left-1/2 md:-translate-x-1/2 flex items-center justify-center md:h-full p-0 overflow-x-auto no-scrollbar">
+        <nav className="order-3 md:order-none w-full mt-2 md:mt-0 flex-1 flex items-center justify-center md:h-full p-0 overflow-x-auto no-scrollbar">
           {tabs.map((tab) => (
             <button
               key={tab.id}

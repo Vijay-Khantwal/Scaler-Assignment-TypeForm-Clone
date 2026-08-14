@@ -169,7 +169,7 @@ export function RespondentApp({ form, isPreview = false, onClose }: RespondentAp
             </p>
             <button
               onClick={isPreview && onClose ? onClose : () => window.location.href = '/'}
-              className="px-6 py-3 bg-[#3C323E] text-white text-[15px] font-bold rounded-md hover:bg-[#2A232B] transition-colors"
+              className="px-6 py-3 bg-[#3C323E] text-white text-[15px] font-bold rounded-md hover:bg-[#2A232B] transition-colors cursor-pointer"
             >
               {isPreview ? 'Back to builder' : 'Create a typeform'}
             </button>
@@ -180,7 +180,7 @@ export function RespondentApp({ form, isPreview = false, onClose }: RespondentAp
           <span className="text-[13px] text-[#3C323E]">How you ask is everything</span>
           <button
             onClick={() => window.location.href = '/'}
-            className="flex items-center text-[13px] text-white bg-[#2A232B] px-3 py-1.5 rounded-md hover:bg-[#1a151b] transition-colors tracking-wide"
+            className="flex items-center text-[13px] text-white bg-[#2A232B] px-3 py-1.5 rounded-md hover:bg-[#1a151b] transition-colors tracking-wide cursor-pointer"
           >
             Create a <strong className="ml-1">typeform</strong>
           </button>
