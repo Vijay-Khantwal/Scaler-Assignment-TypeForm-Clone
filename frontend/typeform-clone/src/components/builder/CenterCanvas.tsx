@@ -469,7 +469,7 @@ function EditChoicesModal({
             <h2 className="text-xl font-semibold text-[#3C323E]">Edit choices</h2>
             <button
               onClick={onClose}
-              className="p-1 rounded-lg text-[#847E85] hover:text-[#3C323E] hover:bg-[#f7f5f8] transition-colors"
+              className="p-1 rounded-lg text-[#847E85] hover:text-[#3C323E] hover:bg-[#f7f5f8] transition-colors cursor-pointer"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
             </button>
@@ -483,20 +483,20 @@ function EditChoicesModal({
             rows={7}
             style={{ border: '1px solid #e4e4e7', borderRadius: 12, padding: '12px 16px', resize: 'none', background: '#fcfcfd' }}
             className="w-full text-sm text-[#3C323E] placeholder:text-[#c4c1c5]"
-            placeholder={`choice 1\nchoice 2\nchoice 3`}
+            placeholder={`Your choices go here\nOne per line\nLike this\n:-)`}
             autoFocus
           />
         </div>
         <div className="flex items-center justify-end gap-3 px-8 py-5 bg-[#f9f8f9] border-t border-[#f0eeef]">
           <button
             onClick={onClose}
-            className="px-5 py-2.5 text-sm text-[#655D67] hover:text-[#3C323E] transition-colors"
+            className="px-5 py-2.5 text-sm text-[#655D67] hover:text-[#3C323E] transition-colors cursor-pointer"
           >
             Cancel
           </button>
           <button
             onClick={save}
-            className="px-5 py-2.5 bg-[#1a1a1a] text-white text-sm font-medium rounded-lg hover:bg-[#2d2d2d] transition-colors"
+            className="px-5 py-2.5 bg-[#1a1a1a] text-white text-sm font-medium rounded-lg hover:bg-[#2d2d2d] transition-colors cursor-pointer"
           >
             Save choices
           </button>
@@ -541,7 +541,7 @@ function DropdownPreview({
         <div className="flex items-center justify-between pt-1">
           <button
             onClick={() => setShowModal(true)}
-            className="text-xs text-[#655D67] hover:text-[#3C323E] underline transition-colors"
+            className="text-xs text-[#655D67] hover:text-[#3C323E] underline transition-colors cursor-pointer"
           >
             Edit choices
           </button>
