@@ -410,18 +410,30 @@ function QuestionInput({
         />
       );
 
-    case 'multiple_choice':
+    case 'multiple_choice': {
+      const isMulti = question.typeSettings?.allowMultipleSelection;
+      const currentValues: string[] = isMulti 
+        ? (Array.isArray(value) ? value : (value ? [value] : []))
+        : [];
       return (
         <div className="flex flex-col gap-2 mt-2">
           {question.options?.map((opt, i) => {
-            const isSelected = value === opt.label;
+            const isSelected = isMulti ? currentValues.includes(opt.label) : value === opt.label;
             const letter = String.fromCharCode(65 + i);
             return (
               <button
                 key={opt.id}
                 onClick={() => {
-                  onChange(opt.label);
-                  setTimeout(onNext, 400);
+                  if (isMulti) {
+                    if (isSelected) {
+                      onChange(currentValues.filter(v => v !== opt.label));
+                    } else {
+                      onChange([...currentValues, opt.label]);
+                    }
+                  } else {
+                    onChange(opt.label);
+                    setTimeout(onNext, 400);
+                  }
                 }}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg border text-left transition-all text-sm cursor-pointer ${
                   isSelected
@@ -438,6 +450,7 @@ function QuestionInput({
           })}
         </div>
       );
+    }
 
     case 'dropdown': {
       const options = question.options ?? [];
