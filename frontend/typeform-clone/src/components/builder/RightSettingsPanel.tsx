@@ -63,6 +63,7 @@ function QuestionTypeSelect({ q, patch }: { q: Question; patch: (p: any) => void
                   onClick={() => {
                     if (q.type !== t) {
                       patch({
+                        type: t,
                         title: q.title,
                         settings: q.settings,
                         typeSettings: {},
