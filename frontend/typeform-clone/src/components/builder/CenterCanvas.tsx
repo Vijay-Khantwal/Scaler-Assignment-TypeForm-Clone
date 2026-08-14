@@ -168,11 +168,14 @@ export function CenterCanvas({ form }: CenterCanvasProps) {
       <div className="flex-1 flex flex-col relative px-6 pb-6 pt-8">
         {form.questions.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center p-8 h-full min-h-[400px]">
-            <div className="w-16 h-16 rounded-2xl bg-white border border-[#e4e4e7] flex items-center justify-center mb-4 shadow-sm">
+            <button 
+              onClick={() => useFormStore.getState().setAddContentModalOpen(true)}
+              className="w-16 h-16 rounded-2xl bg-white border border-[#e4e4e7] flex items-center justify-center mb-4 shadow-sm cursor-pointer hover:bg-[#f7f5f8] transition-colors"
+            >
               <svg width="28" height="28" viewBox="0 0 16 16" fill="none">
                 <path fill="#847E85" fillRule="evenodd" clipRule="evenodd" d="M8 2a.75.75 0 0 1 .75.75v4.5h4.5a.75.75 0 0 1 0 1.5h-4.5v4.5a.75.75 0 0 1-1.5 0v-4.5h-4.5a.75.75 0 0 1 0-1.5h4.5v-4.5A.75.75 0 0 1 8 2" />
               </svg>
-            </div>
+            </button>
             <p className="text-base font-medium text-[#3C323E] mb-1">Start building your form</p>
             <p className="text-sm text-[#847E85]">
               Click &ldquo;Add content&rdquo; in the left panel to add questions
