@@ -14,6 +14,7 @@ class Form(Base):
     created_at = Column(String, default=lambda: datetime.datetime.utcnow().isoformat())
     updated_at = Column(String, default=lambda: datetime.datetime.utcnow().isoformat())
     published_at = Column(String, nullable=True)
+    published_schema = Column(JSON, nullable=True)
 
     questions = relationship("Question", back_populates="form", cascade="all, delete-orphan")
     submissions = relationship("Submission", back_populates="form", cascade="all, delete-orphan")

@@ -283,7 +283,6 @@ export function RespondentApp({ form, isPreview = false, onClose }: RespondentAp
                       </svg>
                     )}
                   </button>
-                  <span className="text-xs text-[#847E85]">press <kbd className="font-mono bg-white border border-[#e4e4e7] px-1 rounded text-[#3C323E]">Enter</kbd> ↵</span>
                 </div>
 
                 <p className="text-xs text-[#847E85] mt-4">

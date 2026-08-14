@@ -11,6 +11,15 @@ from database import engine, get_db
 
 models.Base.metadata.create_all(bind=engine)
 
+# Safely add published_schema column if it doesn't exist for older SQLite DBs
+try:
+    from sqlalchemy import text
+    with engine.connect() as conn:
+        conn.execute(text("ALTER TABLE forms ADD COLUMN published_schema JSON"))
+        conn.commit()
+except Exception:
+    pass
+
 app = FastAPI(title="Typeform Clone API")
 
 app.add_middleware(
@@ -160,6 +169,13 @@ def publish_form(form_id: str, db: Session = Depends(get_db)):
     for q in db_form.questions:
         if q.options:
             q.options.sort(key=lambda o: o.order_index)
+            
+    # Serialize the current questions to save as a snapshot
+    questions_data = [schemas.Question.model_validate(q).model_dump(by_alias=True) for q in db_form.questions]
+    db_form.published_schema = questions_data
+    db.commit()
+    db.refresh(db_form)
+    
     return db_form
 
 @app.get("/api/public/forms/{share_id}", response_model=schemas.Form)
@@ -170,55 +186,60 @@ def get_public_form(share_id: str, db: Session = Depends(get_db)):
     ).first()
     if not form:
         raise HTTPException(status_code=404, detail="Form not found")
-    form.questions.sort(key=lambda q: q.order_index)
-    for q in form.questions:
-        if q.options:
-            q.options.sort(key=lambda o: o.order_index)
-    return form
+    # Construct response dictionary overriding live questions with the published snapshot
+    form_data = schemas.Form.model_validate(form).model_dump(by_alias=True)
+    if form.published_schema:
+        form_data["questions"] = form.published_schema
+    return form_data
 
 @app.post("/api/public/forms/{share_id}/submissions")
 def submit_form(share_id: str, submission: schemas.FormSubmissionCreate, db: Session = Depends(get_db)):
     form = db.query(models.Form).filter(models.Form.share_id == share_id, models.Form.status == "published").first()
     if not form:
         raise HTTPException(status_code=404, detail="Form not found")
-        
-    # Server-side validation
+    # Server-side validation against the published snapshot
     import re
     answers_by_q_id = {ans.question_id: ans.value for ans in submission.answers}
     
-    for q in form.questions:
-        val = answers_by_q_id.get(q.id)
+    questions_to_validate = form.published_schema if form.published_schema else [schemas.Question.model_validate(q).model_dump(by_alias=True) for q in form.questions]
+    
+    for q_dict in questions_to_validate:
+        q_id = q_dict.get("id")
+        q_title = q_dict.get("title", "")
+        q_type = q_dict.get("type", "")
+        val = answers_by_q_id.get(q_id)
+        
         is_empty = val is None or val == "" or (isinstance(val, list) and len(val) == 0)
         
-        settings = q.settings or {}
+        settings = q_dict.get("settings", {})
         if settings.get("required") and is_empty:
-            raise HTTPException(status_code=400, detail=f"Question '{q.title}' is required.")
+            raise HTTPException(status_code=400, detail=f"Question '{q_title}' is required.")
             
         if not is_empty:
-            type_settings = q.type_settings or {}
+            type_settings = q_dict.get("typeSettings", {})
             
-            if q.type in ["short_text", "long_text"]:
+            if q_type in ["short_text", "long_text"]:
                 max_len = type_settings.get("maxLength")
                 if max_len and len(str(val)) > max_len:
-                    raise HTTPException(status_code=400, detail=f"Answer for '{q.title}' exceeds max length of {max_len}.")
+                    raise HTTPException(status_code=400, detail=f"Answer for '{q_title}' exceeds max length of {max_len}.")
                     
-            elif q.type == "email":
+            elif q_type == "email":
                 if not re.match(r"^[^\s@]+@[^\s@]+\.[^\s@]+$", str(val)):
-                    raise HTTPException(status_code=400, detail=f"Invalid email format for '{q.title}'.")
+                    raise HTTPException(status_code=400, detail=f"Invalid email format for '{q_title}'.")
                     
-            elif q.type == "number":
+            elif q_type == "number":
                 try:
                     num_val = float(val)
                 except ValueError:
-                    raise HTTPException(status_code=400, detail=f"Answer for '{q.title}' must be a number.")
+                    raise HTTPException(status_code=400, detail=f"Answer for '{q_title}' must be a number.")
                 
                 min_val = type_settings.get("minValue")
                 if min_val is not None and num_val < min_val:
-                    raise HTTPException(status_code=400, detail=f"Answer for '{q.title}' must be at least {min_val}.")
+                    raise HTTPException(status_code=400, detail=f"Answer for '{q_title}' must be at least {min_val}.")
                     
                 max_val = type_settings.get("maxValue")
                 if max_val is not None and num_val > max_val:
-                    raise HTTPException(status_code=400, detail=f"Answer for '{q.title}' must be at most {max_val}.")
+                    raise HTTPException(status_code=400, detail=f"Answer for '{q_title}' must be at most {max_val}.")
     
     db_sub = models.Submission(
         id=generate_id("sub"),

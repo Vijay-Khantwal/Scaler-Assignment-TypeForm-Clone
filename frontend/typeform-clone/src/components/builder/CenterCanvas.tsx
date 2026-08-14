@@ -121,22 +121,45 @@ export function CenterCanvas({ form }: CenterCanvasProps) {
         <div className="flex items-center gap-0.5">
           <Tooltip text="Check accessibility">
             <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="p-1.5 text-[#655D67] hover:text-[#3C323E] hover:bg-[#e4e4e7] rounded-lg transition-colors cursor-pointer">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="16" cy="4" r="1"/><rect width="6" height="14" x="13" y="8" rx="1"/><path d="M16 22v-2"/><path d="M22 13h-2"/><path d="M16 8V6"/><path d="M10 13H8"/><path d="M5 21a11 11 0 0 1 1-11c.2 0 .4 0 .6.03"/></svg>
+              <svg width="17" height="17" fill="none" viewBox="0 0 16 16" cursor="unset">
+                <g fill="currentColor" clipPath="url(#accessibility-clip)">
+                  <path d="M9.176 4.825a1.176 1.176 0 1 1-2.352 0 1.176 1.176 0 0 1 2.352 0M5.527 6.32a.588.588 0 1 0-.148 1.166h.005c.666.084 1.337.149 2.008.183-.097 1.312-.553 2.318-1.569 3.322a.588.588 0 1 0 .827.837c.61-.604 1.058-1.222 1.367-1.884.314.656.753 1.266 1.318 1.868a.588.588 0 0 0 .857-.805C9.219 9.972 8.72 8.965 8.61 7.669c.67-.034 1.34-.1 2.005-.183h.005a.588.588 0 1 0-.149-1.166h-.002c-.818.102-1.646.19-2.47.19s-1.652-.088-2.47-.19z" fill="currentColor"></path>
+                  <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M1.5 8a6.5 6.5 0 1 1 13 0 6.5 6.5 0 0 1-13 0" fillRule="evenodd" clipRule="evenodd" fill="currentColor"></path>
+                </g>
+                <defs>
+                  <clipPath id="accessibility-clip"><path fill="currentColor" d="M0 0h16v16H0z"></path></clipPath>
+                </defs>
+              </svg>
             </button>
           </Tooltip>
-          <Tooltip text="Undo">
+          <Tooltip text="Version history">
             <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="p-1.5 text-[#655D67] hover:text-[#3C323E] hover:bg-[#e4e4e7] rounded-lg transition-colors cursor-pointer">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
+              <svg width="17" height="17" fill="none" viewBox="0 0 16 16" cursor="unset">
+                <g fill="currentColor" clipPath="url(#history-clip)">
+                  <path d="M8 1.499a6.501 6.501 0 0 0-3 12.27v-3.05a.75.75 0 0 1 1.5 0v3.953C6.5 15.405 5.905 16 5.171 16H.75a.75.75 0 1 1 0-1.5h2.584A8.001 8.001 0 0 1 11.001.58a.75.75 0 0 1-.563 1.391A6.5 6.5 0 0 0 8 1.5" fillRule="evenodd" clipRule="evenodd"></path>
+                  <path d="M8.834 16a.896.896 0 1 0 0-1.792.896.896 0 0 0 0 1.792M16 7.042a.896.896 0 1 0-1.792 0 .896.896 0 0 0 1.792 0M15.041 9.97a.896.896 0 1 1-.896 1.551.896.896 0 0 1 .896-1.552M12.746 14.472a.896.896 0 1 0-.896-1.552.896.896 0 0 0 .896 1.552M14.143 4.354a.896.896 0 1 1-.896-1.551.896.896 0 0 1 .896 1.551"></path>
+                </g>
+                <defs><clipPath id="history-clip"><path fill="currentColor" d="M0 0h16v16H0z"></path></clipPath></defs>
+              </svg>
             </button>
           </Tooltip>
-          <Tooltip text="Languages">
+          <Tooltip text="Translations">
             <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="p-1.5 text-[#655D67] hover:text-[#3C323E] hover:bg-[#e4e4e7] rounded-lg transition-colors cursor-pointer">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+              <svg width="17" height="17" fill="none" viewBox="0 0 16 16" cursor="unset">
+                <path fill="currentColor" d="M6 .732a.75.75 0 0 1 .75.75v1.029h3.5a.75.75 0 0 1 0 1.5H8.758A7.8 7.8 0 0 1 7.005 7.65a11.2 11.2 0 0 0 2.434 1.395l.771-2.017a1.113 1.113 0 0 1 2.08 0l2.66 6.954a.75.75 0 1 1-1.4.536L12.969 13H9.53l-.58 1.518a.75.75 0 1 1-1.402-.536l1.353-3.535c-.993-.42-2.035-.987-2.971-1.734-.903.76-1.916 1.335-2.895 1.759a.75.75 0 1 1-.596-1.377 10.3 10.3 0 0 0 2.386-1.414C3.933 6.7 3.24 5.49 2.946 4.011H1.749a.75.75 0 1 1 0-1.5h3.5V1.482A.75.75 0 0 1 6 .732M4.482 4.011c.257 1.018.761 1.886 1.417 2.621a6.3 6.3 0 0 0 1.325-2.621zm5.622 7.489h2.29L11.25 8.508z" fillRule="evenodd" clipRule="evenodd"></path>
+              </svg>
             </button>
           </Tooltip>
           <Tooltip text="Settings">
             <button onClick={() => import('react-hot-toast').then(m => m.default('Coming soon', { icon: '🚧' }))} className="p-1.5 text-[#655D67] hover:text-[#3C323E] hover:bg-[#e4e4e7] rounded-lg transition-colors cursor-pointer">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg width="17" height="17" fill="none" viewBox="0 0 16 16" cursor="unset">
+                <g clipPath="url(#settings-clip)" fill="none">
+                  <path fill="currentColor" d="M7.81 1.5a.25.25 0 0 0-.208.111l-.77 1.155a1.75 1.75 0 0 1-1.85.734L3.84 3.237a.25.25 0 0 0-.233.066l-.304.304a.25.25 0 0 0-.066.233L3.5 4.983a1.75 1.75 0 0 1-.734 1.85l-1.155.77a.25.25 0 0 0-.111.207v.38a.25.25 0 0 0 .111.208l1.155.77a1.75 1.75 0 0 1 .734 1.85l-.263 1.142a.25.25 0 0 0 .066.233l.304.303a.25.25 0 0 0 .233.067l1.143-.263a1.75 1.75 0 0 1 1.85.734l.77 1.155a.25.25 0 0 0 .207.111h.38a.25.25 0 0 0 .208-.111l.77-1.155a1.75 1.75 0 0 1 1.85-.734l1.142.263a.25.25 0 0 0 .233-.066l.303-.304a.25.25 0 0 0 .067-.233l-.263-1.143a1.75 1.75 0 0 1 .734-1.85l1.155-.77a.25.25 0 0 0 .111-.207v-.38a.25.25 0 0 0-.111-.208l-1.155-.77a1.75 1.75 0 0 1-.734-1.85l.263-1.142a.25.25 0 0 0-.066-.233l-.304-.304a.25.25 0 0 0-.233-.066l-1.143.263a1.75 1.75 0 0 1-1.85-.734l-.77-1.155A.25.25 0 0 0 8.19 1.5zM6.354.78A1.75 1.75 0 0 1 7.81 0h.38a1.75 1.75 0 0 1 1.456.78l.77 1.154a.25.25 0 0 0 .264.105l1.143-.264a1.75 1.75 0 0 1 1.63.468l.304.304a1.75 1.75 0 0 1 .468 1.63L13.96 5.32a.25.25 0 0 0 .105.264l1.155.77c.487.325.779.871.779 1.456v.38a1.75 1.75 0 0 1-.78 1.456l-1.154.77a.25.25 0 0 0-.105.264l.264 1.143a1.75 1.75 0 0 1-.468 1.63l-.303.304a1.75 1.75 0 0 1-1.631.468l-1.143-.264a.25.25 0 0 0-.264.105l-.77 1.155A1.75 1.75 0 0 1 8.19 16h-.38a1.75 1.75 0 0 1-1.456-.78l-.77-1.154a.25.25 0 0 0-.264-.105l-1.143.264a1.75 1.75 0 0 1-1.63-.468l-.304-.303a1.75 1.75 0 0 1-.468-1.631l.264-1.143a.25.25 0 0 0-.105-.264l-1.155-.77A1.75 1.75 0 0 1 0 8.19v-.38c0-.585.292-1.131.78-1.456l1.154-.77a.25.25 0 0 0 .105-.264l-.264-1.143a1.75 1.75 0 0 1 .468-1.63l.304-.304a1.75 1.75 0 0 1 1.63-.468l1.143.264a.25.25 0 0 0 .264-.105zM8 6.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M5 8a3 3 0 1 1 6 0 3 3 0 0 1-6 0" fillRule="evenodd" clipRule="evenodd"></path>
+                </g>
+                <defs>
+                  <clipPath id="settings-clip"><path fill="currentColor" d="M0 0h16v16H0z"></path></clipPath>
+                </defs>
+              </svg>
             </button>
           </Tooltip>
         </div>
@@ -156,7 +179,7 @@ export function CenterCanvas({ form }: CenterCanvasProps) {
             </p>
           </div>
         ) : (
-          <div className={`w-full mx-auto shrink-0 flex flex-col bg-[#F7F7F8] rounded-none shadow-sm border border-[#e4e4e7] overflow-hidden transition-all duration-300 ${isMobileView ? 'max-w-[390px] h-[620px]' : 'max-w-[820px] h-[480px]'}`}>
+          <div className={`w-full mx-auto shrink-0 flex flex-col bg-[#F7F7F8] rounded-none shadow-sm border border-[#e4e4e7] overflow-hidden transition-all duration-300 ${isMobileView ? 'max-w-[390px] h-[620px]' : 'max-w-[960px] h-[560px]'}`}>
             <div className="flex-1 overflow-y-auto px-16 py-16 custom-scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
               <div className="space-y-2 flex flex-col">
         {(() => {

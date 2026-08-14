@@ -137,7 +137,9 @@ function MaxLengthSettings({ q, patch }: { q: Question; patch: (p: any) => void 
           type="text"
           value={q.typeSettings.maxLength ?? ''}
           onChange={handleChange}
-          className="w-full bg-white border border-[#e4e4e7] rounded-lg px-3 py-2 text-[13px] text-[#3C323E] outline-none focus:border-[#c8c4c9] transition-colors mb-4"
+          className="w-full px-3 py-2 text-[13px] text-[#3C323E] outline-none transition-colors mb-4"
+          style={{ border: '1px solid #d4d1d5', backgroundColor: '#fcfcfc', borderRadius: '8px' }}
+          placeholder="0-999999999"
         />
       )}
       <SwitchRow

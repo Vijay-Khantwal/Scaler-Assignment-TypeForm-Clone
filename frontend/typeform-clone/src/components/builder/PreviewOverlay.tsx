@@ -22,7 +22,7 @@ export function PreviewOverlay({ form, onClose }: PreviewOverlayProps) {
           <button
             onClick={onClose}
             title="Close preview"
-            className="w-8 h-8 flex items-center justify-center rounded-full text-[#655D67] hover:text-[#3C323E] hover:bg-[#f7f5f8] transition-colors"
+            className="w-8 h-8 flex items-center justify-center rounded-full text-[#655D67] hover:text-[#3C323E] hover:bg-[#f7f5f8] transition-colors cursor-pointer"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
@@ -35,7 +35,7 @@ export function PreviewOverlay({ form, onClose }: PreviewOverlayProps) {
           <button
             onClick={() => setIsMobile(!isMobile)}
             title={isMobile ? "Switch to desktop" : "Switch to mobile"}
-            className="w-8 h-8 flex items-center justify-center rounded-full text-[#655D67] hover:text-[#3C323E] hover:bg-[#f7f5f8] transition-colors"
+            className="w-8 h-8 flex items-center justify-center rounded-full text-[#655D67] hover:text-[#3C323E] hover:bg-[#f7f5f8] transition-colors cursor-pointer"
           >
             {isMobile ? (
               // desktop icon
@@ -57,7 +57,7 @@ export function PreviewOverlay({ form, onClose }: PreviewOverlayProps) {
           <button
             onClick={() => setResetKey(k => k + 1)}
             title="Restart preview"
-            className="w-8 h-8 flex items-center justify-center rounded-full text-[#655D67] hover:text-[#3C323E] hover:bg-[#f7f5f8] transition-colors"
+            className="w-8 h-8 flex items-center justify-center rounded-full text-[#655D67] hover:text-[#3C323E] hover:bg-[#f7f5f8] transition-colors cursor-pointer"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
@@ -83,8 +83,9 @@ export function PreviewOverlay({ form, onClose }: PreviewOverlayProps) {
                 }
               : {
                   width: '100%',
-                  maxWidth: 900,
+                  maxWidth: 1024,
                   height: '100%',
+                  maxHeight: 640,
                   borderRadius: 8,
                   boxShadow: '0 0 0 1px #d4d0d5, 0 12px 40px rgba(0,0,0,0.15)',
                 }
