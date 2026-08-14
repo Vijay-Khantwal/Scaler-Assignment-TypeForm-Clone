@@ -80,7 +80,7 @@ function QuestionTypeSelect({ q, patch }: { q: Question; patch: (p: any) => void
                     setSearch('');
                   }}
                   className={cn(
-                    "w-full flex items-center justify-between px-3 py-2 text-[13px] transition-colors border-l-2",
+                    "w-full flex items-center justify-between px-3 py-2 text-[13px] transition-colors border-l-2 cursor-pointer",
                     isSelected ? "bg-[#f7f5f8] text-[#3C323E] font-medium border-[#3C323E]" : "text-[#655D67] hover:bg-[#f7f5f8] hover:text-[#3C323E] border-transparent"
                   )}
                 >
